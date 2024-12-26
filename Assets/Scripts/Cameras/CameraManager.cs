@@ -18,11 +18,14 @@ public class CameraManager : MonoBehaviour
     public bool LerpedFromPlayerFalling { get; set; }
 
     private Coroutine _lerpYPanCoroutine;
+    private Coroutine _panCameraCoroutine;
 
     private CinemachineVirtualCamera _currentCamera;
     private CinemachineFramingTransposer _framingTransposer;
 
     private float _normYPanAmount;
+
+    private Vector2 _startingTrackedObjectOffset;
 
     private void Awake()
     {
@@ -43,20 +46,13 @@ public class CameraManager : MonoBehaviour
             }
         }
 
+        //Set the YDamping amount so it is based on the inspector value
         _normYPanAmount = _framingTransposer.m_YDamping;
-    }
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        //Set the starting position of the tracked object offset
+        _startingTrackedObjectOffset = _framingTransposer.m_TrackedObjectOffset;
     }
-
+    #region LERP THE Y DAMPING
     public void LerpYDamping(bool isPlayerFalling)
     {
         _lerpYPanCoroutine = StartCoroutine(LerpYAction(isPlayerFalling));
@@ -95,4 +91,104 @@ public class CameraManager : MonoBehaviour
 
         IsLerpingYDamping = false;
     }
+    #endregion
+
+    #region PAN CAMERA
+
+    public void PanCameraOnContact(float panDistance, float panTime, PanDirection panDirection, bool panToStarting)
+    {
+        _panCameraCoroutine = StartCoroutine(PanCamera(panDistance, panTime, panDirection, panToStarting));
+    }
+
+    private IEnumerator PanCamera(float panDistance, float panTime, PanDirection panDirection, bool panToStartingPos)
+    {
+        Vector2 endPos = Vector2.zero;
+        Vector2 startingPos = Vector2.zero;
+
+        //handle pan from trigger
+        if (!panToStartingPos)
+        {
+            //set the direction and distance
+            switch(panDirection)
+            {
+                case PanDirection.Up:
+                    endPos = Vector2.up;
+                    break;
+                case PanDirection.Down:
+                    endPos = Vector2.down;
+                    break;
+                case PanDirection.Left:
+                    endPos = Vector2.left;
+                    break;
+                case PanDirection.Right:
+                    endPos = Vector2.right;
+                    break;
+            }
+
+            endPos *= panDistance;
+
+            startingPos = _startingTrackedObjectOffset;
+
+            endPos += startingPos;
+        }
+
+        //handle the direction settings when moving back to the starting position
+        else
+        {
+            startingPos = _framingTransposer.m_TrackedObjectOffset;
+            endPos = _startingTrackedObjectOffset;
+        }
+
+        //handle the actual panning of the camera
+        float elapsedTime = 0f;
+        while (elapsedTime < panTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            Vector3 panLerp = Vector3.Lerp(startingPos, endPos, (elapsedTime/panTime));
+            _framingTransposer.m_TrackedObjectOffset = panLerp;
+
+            yield return null;
+        }
+    }
+
+    #endregion
+
+    #region SWAP CAMERAS
+
+    public void SwapCameras(CinemachineVirtualCamera cameraFromLeft, CinemachineVirtualCamera cameraFromRight, Vector2 triggerExitDirection)
+    {
+        //if the current camera om the left and our trigger exit direction was on the right
+        if (_currentCamera == cameraFromLeft && triggerExitDirection.x > 0)
+        {
+            //activate the new camera
+            cameraFromRight.enabled = true;
+
+            //deactivate the old camera
+            cameraFromLeft.enabled = false;
+
+            //set the new camera as the current camera
+            _currentCamera = cameraFromRight;
+
+            //update out composer visible
+            _framingTransposer = _currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        }
+
+        //if the current camera om the right and our trigger exit direction was on the left
+        else if (_currentCamera == cameraFromRight && triggerExitDirection.x < 0)
+        {
+            //activate the new camera
+            cameraFromLeft.enabled = true;
+
+            //deactivate the old camera
+            cameraFromRight.enabled = false;
+
+            //set the new camera as the current camera
+            _currentCamera = cameraFromLeft;
+
+            //update out composer visible
+            _framingTransposer = _currentCamera.GetCinemachineComponent<CinemachineFramingTransposer>();
+        }
+    }
+    #endregion
 }

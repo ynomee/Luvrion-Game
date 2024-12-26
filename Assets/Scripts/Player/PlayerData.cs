@@ -47,6 +47,7 @@ public class PlayerData : ScriptableObject
 	[Space(5f)]
 	[Header("Double Jump")]
 	public float airJumps;
+
     [Space(5f)]
 
     [Header("Wall Jump")]
@@ -97,8 +98,8 @@ public class PlayerData : ScriptableObject
 		//Calculate jumpForce using the formula (initialJumpVelocity = gravity * timeToJumpApex)
 		jumpForce = Mathf.Abs(gravityStrength) * jumpTimeToApex;
 
-		#region Variable Ranges
-		runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
+        #region Variable Ranges
+        runAcceleration = Mathf.Clamp(runAcceleration, 0.01f, runMaxSpeed);
 		runDecceleration = Mathf.Clamp(runDecceleration, 0.01f, runMaxSpeed);
 		#endregion
 	}

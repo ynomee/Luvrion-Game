@@ -25,6 +25,11 @@ public class CameraFollowObject : MonoBehaviour
 
     private void Update()
     {
+
+    }
+
+    private void LateUpdate()
+    {
         //make the cameraFollowObj follow the player's pos
         transform.position = _playerTransform.position;
     }
