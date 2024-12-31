@@ -2,22 +2,57 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public interface IPlayerObserver
+{
+    void OnSpeedChanged(float speed);
+    void OnJump();
+    void OnLand();
+}
+
 public class PlayerModel
 {
-    public float Speed { get; private set; }
-    public bool IsJumping { get; private set; }
-    public bool IsDoubleJumping { get; private set; }
-    public bool IsDashing { get; private set; }
-    public bool IsOnWall { get; private set; }
+    private readonly List<IPlayerObserver> _observers = new List<IPlayerObserver>();
 
-    public void UpdateSpeed(float speed)
+    private float _speed;
+
+    public void RegisterObserver(IPlayerObserver observer)
     {
-        Speed = speed;
+        if (!_observers.Contains(observer))
+        {
+            _observers.Add(observer);
+        }
     }
 
-    public void Jump()
+    public void UnregisterObserver(IPlayerObserver observer)
     {
-        IsJumping = true;
-        IsDoubleJumping = false;
+        _observers.Remove(observer);
     }
+
+    public void UpdateSpeed(float newSpeed)
+    {
+        if (Mathf.Approximately(_speed, newSpeed)) return;
+        _speed = newSpeed;
+
+        foreach (var observer in _observers)
+        {
+            observer.OnSpeedChanged(_speed);
+        }
+    }
+
+    public void TriggerJump()
+    {
+        foreach (var observer in _observers)
+        {
+            observer.OnJump();
+        }
+    }
+
+    public void TriggerLand()
+    {
+        foreach (var observer in _observers)
+        {
+            observer.OnLand();
+        }
+    }
+
 }

@@ -12,6 +12,14 @@ public class PlayerMovement : MonoBehaviour
     #region COMPONENTS
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
+    [SerializeField] private PlayerView _playerView;
+
+    private PlayerModel _playerModel;
+
+    public PlayerMovement(PlayerModel model)
+    {
+        _playerModel = model;
+    }
 
 
     public Rigidbody2D RB { get; private set; }
@@ -93,6 +101,8 @@ public class PlayerMovement : MonoBehaviour
         _playerInput.onActionTriggered += OnPlayerInputActionTriggered;
 
         _animator.GetComponent<Animator>();
+
+        _playerModel = new PlayerModel();
     }
 
     private void Start()
@@ -357,15 +367,23 @@ public class PlayerMovement : MonoBehaviour
         {
             case "Move":
                 _moveInput = context.action.ReadValue<Vector2>();
+                UpdateRunAnimation();
                 break;
             case "Jump":
                 switch (context.action.phase)
                 {
                     case InputActionPhase.Started:
                         OnJumpInput();
+                        _playerModel.TriggerJump();
+                        _playerView.OnJump();
+                        break;
+                    case InputActionPhase.Performed:
+                        _playerModel.TriggerLand();
+                        _playerView.OnLand();
                         break;
                     case InputActionPhase.Canceled:
                         OnJumpUpInput();
+
                         break;
                 }
                 break;
@@ -376,6 +394,11 @@ public class PlayerMovement : MonoBehaviour
         }
     }
     #endregion
+    private void UpdateRunAnimation()
+    {
+        _playerModel.UpdateSpeed(_moveInput.x);
+        _playerView.OnSpeedChanged(_moveInput.x);
+    }
 
     #region INPUT CALLBACKS
     //Methods which whandle input detected in Update()
