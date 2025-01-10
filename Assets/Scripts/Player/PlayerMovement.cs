@@ -12,15 +12,8 @@ public class PlayerMovement : MonoBehaviour
     #region COMPONENTS
     [SerializeField] private PlayerInput _playerInput;
     [SerializeField] private Animator _animator;
-    [SerializeField] private PlayerView _playerView;
 
-    private PlayerModel _playerModel;
-
-    public PlayerMovement(PlayerModel model)
-    {
-        _playerModel = model;
-    }
-
+    public PlayerModel _playerModel;
 
     public Rigidbody2D RB { get; private set; }
     //Script to handle all player animations, all references can be safely removed if you're importing into your own project.
@@ -101,8 +94,6 @@ public class PlayerMovement : MonoBehaviour
         _playerInput.onActionTriggered += OnPlayerInputActionTriggered;
 
         _animator.GetComponent<Animator>();
-
-        _playerModel = new PlayerModel();
     }
 
     private void Start()
@@ -166,7 +157,7 @@ public class PlayerMovement : MonoBehaviour
                 _isJumpFalling = false;
                 Jump();
 
-                //ÀÍÈÌÀÒÎÐ AnimHandler.startedJumping = true;
+                UpdateJumpAnimation();
             }
             //WALL JUMP
             else if (CanWallJump() && LastPressedJumpTime > 0)
@@ -180,6 +171,8 @@ public class PlayerMovement : MonoBehaviour
                 _lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
 
                 WallJump(_lastWallJumpDir);
+
+                //UpdateWallJumpAnimation();
             }
             //DOUBLE JUMP
             else if (LastPressedJumpTime > 0 && _bonusJumpsLeft > 0)
@@ -216,6 +209,8 @@ public class PlayerMovement : MonoBehaviour
             IsJumping = false;
             IsWallJumping = false;
             _isJumpCut = false;
+
+            UpdateDashAnimation();
 
             StartCoroutine(nameof(StartDash), _lastDashDir);
         }
@@ -272,6 +267,12 @@ public class PlayerMovement : MonoBehaviour
             SetGravityScale(0);
         }
         #endregion
+
+        #region UPDATE VERTICAL VELOCITY
+        if (_playerModel == null) return;
+        float verticalVel = RB.velocity.y;
+        _playerModel.UpdateVerticalVelocity(verticalVel);
+        #endregion
     }
 
     private void FixedUpdate()
@@ -279,10 +280,16 @@ public class PlayerMovement : MonoBehaviour
         //Handle Run
         if (!IsDashing)
         {
+            UpdateDashAnimation();
+
             if (IsWallJumping)
+            {
                 Run(Data.wallJumpRunLerp);
+            }
             else
+            {
                 Run(1);
+            }
         }
         else if (_isDashAttacking)
         {
@@ -302,6 +309,7 @@ public class PlayerMovement : MonoBehaviour
                 if (LastOnGroundTime < -0.1f)
                 {
                     // ÀÍÈÌÀÒÎÐ AnimHandler.justLanded = true;
+                    UpdateJumpAnimation();
                 }
 
                 LastOnGroundTime = Data.coyoteTime; // if so sets the lastGrounded to coyoteTime
@@ -313,6 +321,7 @@ public class PlayerMovement : MonoBehaviour
 
             // Update LastOnWallTime
             LastOnWallTime = Mathf.Max(LastOnWallLeftTime, LastOnWallRightTime);
+            UpdateWallJumpAnimation();
         }
         #endregion
     }
@@ -374,16 +383,9 @@ public class PlayerMovement : MonoBehaviour
                 {
                     case InputActionPhase.Started:
                         OnJumpInput();
-                        _playerModel.TriggerJump();
-                        _playerView.OnJump();
-                        break;
-                    case InputActionPhase.Performed:
-                        _playerModel.TriggerLand();
-                        _playerView.OnLand();
                         break;
                     case InputActionPhase.Canceled:
                         OnJumpUpInput();
-
                         break;
                 }
                 break;
@@ -391,13 +393,44 @@ public class PlayerMovement : MonoBehaviour
                 OnDashInput();
                 break;
 
+
         }
     }
     #endregion
     private void UpdateRunAnimation()
     {
         _playerModel.UpdateSpeed(_moveInput.x);
-        _playerView.OnSpeedChanged(_moveInput.x);
+    }
+
+    private void UpdateJumpAnimation()
+    {
+        if (IsJumping)
+            _playerModel.UpdateJumpState(true);
+
+        if (!IsJumping)
+            _playerModel.UpdateJumpState(false);
+    }
+
+    private void UpdateDashAnimation()
+    {
+        if (IsDashing)
+            _playerModel.UpdateDashState(true);
+        if (!IsDashing)
+            _playerModel.UpdateDashState(false);
+    }
+
+    private void UpdateWallJumpAnimation()
+    {
+        if (LastOnWallTime > 0 && LastOnGroundTime < 0 && !IsJumping && !IsDashing)
+        {
+            _playerModel.UpdateWallJumpState(true);     
+        }
+        else
+        {
+            _playerModel.UpdateWallJumpState(false);
+        }
+        Debug.Log($"UpdateWallJumpAnimation: IsWallJumping = {IsWallJumping}");
+
     }
 
     #region INPUT CALLBACKS
@@ -603,7 +636,6 @@ public class PlayerMovement : MonoBehaviour
         {
             yield return null;
         }
-
         //Dash over
         IsDashing = false;
     }
