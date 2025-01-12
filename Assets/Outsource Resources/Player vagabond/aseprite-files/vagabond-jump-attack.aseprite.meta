@@ -21,11 +21,13 @@ ScriptedImporter:
     convertToNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
     isReadable: 0
     streamingMipmaps: 0
     streamingMipmapsPriority: 0
     vTOnly: 0
-    ignoreMasterTextureLimit: 0
+    ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -75,7 +77,6 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -88,7 +89,6 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -448,144 +448,128 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: vagabond-jump-attack_Frame_0
       frameIndex: 0
-      additiveSortOrder: 0
       cellRect:
         x: 15
         y: 18
         width: 30
         height: 19
       spriteId: 9336637a027ffdd429dc693304730a79
-    - name: Frame_1
+    - name: vagabond-jump-attack_Frame_1
       frameIndex: 1
-      additiveSortOrder: 0
       cellRect:
         x: 16
         y: 19
         width: 28
         height: 18
       spriteId: a5567bbc7efc3e641a00b9351f17df7b
-    - name: Frame_7
+    - name: vagabond-jump-attack_Frame_7
       frameIndex: 7
-      additiveSortOrder: 0
       cellRect:
         x: 11
         y: 21
         width: 67
         height: 20
       spriteId: 26e0c452629cb4345a5e506dc16e03df
-    - name: Frame_8
+    - name: vagabond-jump-attack_Frame_8
       frameIndex: 8
-      additiveSortOrder: 0
       cellRect:
         x: 11
         y: 21
         width: 60
         height: 20
       spriteId: cc5ec8f8ce60b0f409f621f9fc69100d
-    - name: Frame_9
+    - name: vagabond-jump-attack_Frame_9
       frameIndex: 9
-      additiveSortOrder: 0
       cellRect:
         x: 11
         y: 21
         width: 32
         height: 20
       spriteId: 9e247231f849eb445819568a8b9938f9
-    - name: Frame_10
+    - name: vagabond-jump-attack_Frame_10
       frameIndex: 10
-      additiveSortOrder: 0
       cellRect:
         x: 11
         y: 21
         width: 31
         height: 20
       spriteId: a5a4d0a1cf0ad0548a7e84a900fa33b3
-    - name: Frame_11
+    - name: vagabond-jump-attack_Frame_11
       frameIndex: 11
-      additiveSortOrder: 0
       cellRect:
         x: 13
         y: 21
         width: 29
         height: 16
       spriteId: fba73d95b208888499b312f89e057cfe
-    - name: Frame_2
+    - name: vagabond-jump-attack_Frame_2
       frameIndex: 2
-      additiveSortOrder: 0
       cellRect:
         x: 17
         y: 21
         width: 64
         height: 16
       spriteId: 50a51e63c8292aa4ab6a40fb90881aab
-    - name: Frame_3
+    - name: vagabond-jump-attack_Frame_3
       frameIndex: 3
-      additiveSortOrder: 0
       cellRect:
         x: 21
         y: 21
         width: 52
         height: 16
       spriteId: c5b1aa52997375f40bafb636429e5d1c
-    - name: Frame_4
+    - name: vagabond-jump-attack_Frame_4
       frameIndex: 4
-      additiveSortOrder: 0
       cellRect:
         x: 21
         y: 21
         width: 22
         height: 16
       spriteId: 4cfc5cc1d6d82824c8bba84de427b6c4
-    - name: Frame_5
+    - name: vagabond-jump-attack_Frame_5
       frameIndex: 5
-      additiveSortOrder: 0
       cellRect:
         x: 21
         y: 21
         width: 22
         height: 16
       spriteId: bb1da9d3809d1034798acf3906dfec98
-    - name: Frame_6
+    - name: vagabond-jump-attack_Frame_6
       frameIndex: 6
-      additiveSortOrder: 0
       cellRect:
         x: 18
         y: 18
         width: 24
         height: 19
       spriteId: 4822ee315a606b84d8a89e39cdd39ebd
-    - name: Frame_12
+    - name: vagabond-jump-attack_Frame_12
       frameIndex: 12
-      additiveSortOrder: 0
       cellRect:
         x: 14
         y: 17
         width: 58
         height: 34
       spriteId: ede73661050806c4f99ed0727a923593
-    - name: Frame_13
+    - name: vagabond-jump-attack_Frame_13
       frameIndex: 13
-      additiveSortOrder: 0
       cellRect:
         x: 30
         y: 17
         width: 38
         height: 25
       spriteId: 65858c2333d026144b719e49697685e0
-    - name: Frame_14
+    - name: vagabond-jump-attack_Frame_14
       frameIndex: 14
-      additiveSortOrder: 0
       cellRect:
         x: 30
         y: 17
         width: 35
         height: 22
       spriteId: a6e426c10846a564eb987461a63aefe8
-    - name: Frame_15
+    - name: vagabond-jump-attack_Frame_15
       frameIndex: 15
-      additiveSortOrder: 0
       cellRect:
         x: 30
         y: 17
@@ -597,6 +581,7 @@ ScriptedImporter:
   platformSettings:
   - name: Default
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -608,6 +593,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: DefaultTexturePlatform
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -619,6 +605,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: Standalone
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -628,7 +615,6 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
-  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 128, y: 64}
