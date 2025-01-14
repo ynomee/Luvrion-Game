@@ -12,10 +12,12 @@ public interface IPlayerObserver
     void OnStopDash();
     void OnWallJumpStart();
     void OnWallJumpEnd();
+    void OnAttack();
 }
 
 public class PlayerModel
 {
+    public Attack attack;
     private readonly List<IPlayerObserver> _observers = new List<IPlayerObserver>();
 
     private float _speed;
@@ -52,7 +54,7 @@ public class PlayerModel
 
     public void UpdateJumpState(bool isJumping)
     {
-        if (_isJumping == isJumping) return; // Избегаем лишних уведомлений
+        if (_isJumping == isJumping) return; // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
 
         _isJumping = isJumping;
 
@@ -109,7 +111,7 @@ public class PlayerModel
 
     }
 
-    // Обновление вертикальной скорости
+    // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
     public void UpdateVerticalVelocity(float newVerticalVelocity)
     {
         if (Mathf.Approximately(_verticalVelocity, newVerticalVelocity)) return;
@@ -119,6 +121,19 @@ public class PlayerModel
         foreach (var observer in _observers)
         {
             observer.OnJumpVelChanged(_verticalVelocity);
+        }
+    }
+
+    public void UpdateAttackState()
+    {
+        if (attack != null)
+        {
+            attack.AttackLogic();
+        }
+        
+        foreach (var observer in _observers)
+        {
+            observer.OnAttack();
         }
     }
 

@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
 
     #region COMPONENTS
     [SerializeField] private PlayerInput _playerInput;
-    [SerializeField] private Animator _animator;
-
     public PlayerModel _playerModel;
 
     public Rigidbody2D RB { get; private set; }
@@ -92,8 +90,6 @@ public class PlayerMovement : MonoBehaviour
         AnimHandler = GetComponent<PlayerAnimator>();
 
         _playerInput.onActionTriggered += OnPlayerInputActionTriggered;
-
-        _animator.GetComponent<Animator>();
     }
 
     private void Start()
@@ -197,22 +193,27 @@ public class PlayerMovement : MonoBehaviour
             //Freeze game for split second. Adds juiciness and a bit of forgiveness over directional input
             Sleep(Data.dashSleepTime);
 
-            //If not direction pressed, dash forward
-            if (_moveInput != Vector2.zero)
-                _lastDashDir = _moveInput;
+            //Can dash if direction left or right
+            if (_moveInput.x > 0)
+                _lastDashDir = Vector2.right;
+            else if (_moveInput.x < 0)
+                _lastDashDir = Vector2.left;
             else
+            //Dash where avatar facing
                 _lastDashDir = IsFacingRight ? Vector2.right : Vector2.left;
 
 
+            if(_lastDashDir == Vector2.left || _lastDashDir == Vector2.right)
+            {
+                IsDashing = true;
+                IsJumping = false;
+                IsWallJumping = false;
+                _isJumpCut = false;
+            
+                UpdateDashAnimation();
 
-            IsDashing = true;
-            IsJumping = false;
-            IsWallJumping = false;
-            _isJumpCut = false;
-
-            UpdateDashAnimation();
-
-            StartCoroutine(nameof(StartDash), _lastDashDir);
+                StartCoroutine(nameof(StartDash), _lastDashDir);
+            }
         }
         #endregion
 
@@ -269,9 +270,7 @@ public class PlayerMovement : MonoBehaviour
         #endregion
 
         #region UPDATE VERTICAL VELOCITY
-        if (_playerModel == null) return;
-        float verticalVel = RB.velocity.y;
-        _playerModel.UpdateVerticalVelocity(verticalVel);
+        UpdateYVelocity();
         #endregion
     }
 
@@ -308,7 +307,7 @@ public class PlayerMovement : MonoBehaviour
             {
                 if (LastOnGroundTime < -0.1f)
                 {
-                    // ÀÍÈÌÀÒÎÐ AnimHandler.justLanded = true;
+                    // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ AnimHandler.justLanded = true;
                     UpdateJumpAnimation();
                 }
 
@@ -392,8 +391,14 @@ public class PlayerMovement : MonoBehaviour
             case "Dash":
                 OnDashInput();
                 break;
-
-
+            case "Attack":
+                switch (context.action.phase)
+                {
+                    case InputActionPhase.Started:
+                        UpdateAttackAnimation();
+                        break;
+                }
+                break;
         }
     }
     #endregion
@@ -403,22 +408,21 @@ public class PlayerMovement : MonoBehaviour
     }
 
     private void UpdateJumpAnimation()
-    {
-        if (IsJumping)
-            _playerModel.UpdateJumpState(true);
-
-        if (!IsJumping)
-            _playerModel.UpdateJumpState(false);
+    {  
+        _playerModel.UpdateJumpState(IsJumping);
     }
 
     private void UpdateDashAnimation()
     {
-        if (IsDashing)
-            _playerModel.UpdateDashState(true);
-        if (!IsDashing)
-            _playerModel.UpdateDashState(false);
+        _playerModel.UpdateDashState(IsDashing);
     }
 
+    private void UpdateYVelocity()
+    {
+        if (_playerModel == null) return;
+        float verticalVel = RB.velocity.y;
+        _playerModel.UpdateVerticalVelocity(verticalVel);
+    }
     private void UpdateWallJumpAnimation()
     {
         if (LastOnWallTime > 0 && LastOnGroundTime < 0 && !IsJumping && !IsDashing)
@@ -429,8 +433,14 @@ public class PlayerMovement : MonoBehaviour
         {
             _playerModel.UpdateWallJumpState(false);
         }
-        Debug.Log($"UpdateWallJumpAnimation: IsWallJumping = {IsWallJumping}");
+        //Debug.Log($"UpdateWallJumpAnimation: IsWallJumping = {IsWallJumping}");
 
+    }
+
+    private void UpdateAttackAnimation()
+    {
+        Debug.Log("Attack action tiggered");
+        _playerModel.UpdateAttackState();
     }
 
     #region INPUT CALLBACKS

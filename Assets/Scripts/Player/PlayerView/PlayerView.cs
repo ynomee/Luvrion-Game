@@ -10,7 +10,7 @@ public class PlayerView : MonoBehaviour, IPlayerObserver
 
     private void Awake()
     {
-        // Регистрируем этот объект как наблюдателя
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
         if (_playerModel != null)
         {
             _playerModel.RegisterObserver(this);
@@ -19,7 +19,7 @@ public class PlayerView : MonoBehaviour, IPlayerObserver
 
     private void OnDestroy()
     {
-        // Отписываемся от модели, чтобы избежать ошибок
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ, пїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         if (_playerModel != null)
         {
             _playerModel.UnregisterObserver(this);
@@ -63,5 +63,10 @@ public class PlayerView : MonoBehaviour, IPlayerObserver
     public void OnWallJumpEnd()
     {
         _animator.SetBool("WallGrabbing", false);
+    }
+
+    public void OnAttack()
+    {
+        _animator.SetTrigger("Melee");
     }
 }
