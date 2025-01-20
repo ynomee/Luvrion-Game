@@ -7,26 +7,19 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private PlayerView _playerView;
     [SerializeField] private PlayerMovement _playerMovement;
 
-    public PlayerModel _playerModel;
+    private PlayerModel _playerModel;
 
     private void Awake()
     {
-        // Создаем модель
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
         _playerModel = new PlayerModel();
 
-        // Передаем модель в View и Movement
-        _playerView._playerModel = _playerModel;
-        _playerModel.RegisterObserver(_playerView);
+        // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅ View пїЅ Movement
+        // _playerView._playerModel = _playerModel;
+        // _playerModel.RegisterObserver(_playerView);
 
-        _playerMovement._playerModel = _playerModel;
-    }
-
-    private void OnDestroy()
-    {
-        // Освобождаем ресурсы
-        if (_playerModel != null)
-        {
-            _playerModel.UnregisterObserver(_playerView);
-        }
+        // _playerMovement._playerModel = _playerModel;
+        _playerView.Initialize(_playerModel);
+        _playerMovement.Initialize(_playerModel);
     }
 }

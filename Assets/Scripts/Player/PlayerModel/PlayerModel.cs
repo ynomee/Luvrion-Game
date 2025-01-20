@@ -17,7 +17,6 @@ public interface IPlayerObserver
 
 public class PlayerModel
 {
-    public Attack attack;
     private readonly List<IPlayerObserver> _observers = new List<IPlayerObserver>();
 
     private float _speed;
@@ -125,12 +124,7 @@ public class PlayerModel
     }
 
     public void UpdateAttackState()
-    {
-        if (attack != null)
-        {
-            attack.AttackLogic();
-        }
-        
+    {   
         foreach (var observer in _observers)
         {
             observer.OnAttack();

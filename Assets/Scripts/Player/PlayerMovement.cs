@@ -11,7 +11,9 @@ public class PlayerMovement : MonoBehaviour
 
     #region COMPONENTS
     [SerializeField] private PlayerInput _playerInput;
-    public PlayerModel _playerModel;
+    //[SerializeField] private Attack _attack;
+    private PlayerModel _playerModel;
+    private IAttack _attack;
 
     public Rigidbody2D RB { get; private set; }
     //Script to handle all player animations, all references can be safely removed if you're importing into your own project.
@@ -84,6 +86,12 @@ public class PlayerMovement : MonoBehaviour
     private CameraFollowObject _cameraFollowObject;
     private float _fallSpeedYDampingChangeThreshold;
     #endregion
+
+    public void Initialize(PlayerModel model)
+    {
+        _playerModel = model;
+    }
+    
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
@@ -100,6 +108,8 @@ public class PlayerMovement : MonoBehaviour
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowObject>();
 
         _fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;
+
+        _attack = GetComponent<IAttack>();
     }
 
     private void Update()
@@ -392,11 +402,10 @@ public class PlayerMovement : MonoBehaviour
                 OnDashInput();
                 break;
             case "Attack":
-                switch (context.action.phase)
+                if (context.action.phase == InputActionPhase.Started)
                 {
-                    case InputActionPhase.Started:
-                        UpdateAttackAnimation();
-                        break;
+                    _attack.HandleAttack(_moveInput.y, LastOnGroundTime);
+                    UpdateAttackAnimation();
                 }
                 break;
         }

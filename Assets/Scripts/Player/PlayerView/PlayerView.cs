@@ -5,26 +5,31 @@ using UnityEngine;
 public class PlayerView : MonoBehaviour, IPlayerObserver
 {
     [SerializeField] private Animator _animator;
-
-    public PlayerModel _playerModel;
-
-    private void Awake()
+    
+    public void Initialize(PlayerModel model)
     {
-        // ������������ ���� ������ ��� �����������
-        if (_playerModel != null)
-        {
-            _playerModel.RegisterObserver(this);
-        }
+        model.RegisterObserver(this);
     }
 
-    private void OnDestroy()
-    {
-        // ������������ �� ������, ����� �������� ������
-        if (_playerModel != null)
-        {
-            _playerModel.UnregisterObserver(this);
-        }
-    }
+    //public PlayerModel _playerModel;
+
+    // private void Awake()
+    // {
+    //     // ������������ ���� ������ ��� �����������
+    //     if (_playerModel != null)
+    //     {
+    //         _playerModel.RegisterObserver(this);
+    //     }
+    // }
+
+    // private void OnDestroy()
+    // {
+    //     // ������������ �� ������, ����� �������� ������
+    //     if (_playerModel != null)
+    //     {
+    //         _playerModel.UnregisterObserver(this);
+    //     }
+    // }
 
     public void OnSpeedChanged(float speed)
     {
