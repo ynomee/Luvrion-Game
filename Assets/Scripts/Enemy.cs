@@ -5,23 +5,54 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float _health;
-    // Start is called before the first frame update
-    void Start()
+
+    [SerializeField] private float _recoilLenght;
+    [SerializeField] private float _recoilFactor;
+    [SerializeField] private bool _isRecoiling = false;
+
+    private Rigidbody2D _rb;
+    private float _recoilTimer;
+
+    private void Awake()
     {
-        
+        _rb = GetComponent<Rigidbody2D>();
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
         if (_health <= 0)
         {
             Destroy(gameObject);
         }
+
+        RecoilCheck();
     }
 
-    public void EnemyHit(float damageDone)
+    public void EnemyHit(float damageDone, Vector2 hitDirection, float hitForce)
     {
         _health -= damageDone;
+
+        if(!_isRecoiling)
+        {
+            // Enemy recoil in the direction that the hit comes from
+            _rb.AddForce(-hitForce * _recoilFactor * hitDirection);
+        }
+
+    }
+
+    private void RecoilCheck()
+    {
+        if (_isRecoiling)
+        {
+            if (_recoilTimer < _recoilLenght)
+            {
+                _recoilTimer += Time.deltaTime;
+            }
+            else
+            {
+                _isRecoiling = false;
+                _recoilTimer = 0;
+            }
+        }
     }
 }

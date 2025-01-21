@@ -10,14 +10,23 @@ public interface IAttack
 
 public class Attack : MonoBehaviour, IAttack
 {
+    [Header("Attack Settings")]
+    [SerializeField] private LayerMask _attackableLayer;
     [SerializeField] private Transform _sideAttackCheck, _upAttackCheck, _downAttackCheck;
     [SerializeField] private Vector2 _sideAttackArea, _upAttackArea, _downAttackArea;
-    [SerializeField] private LayerMask _attackableLayer;
+
     [SerializeField] private GameObject _splashEffect;
+
     [SerializeField] private float _damage;
     [SerializeField] private float _timeBetweenAttack;
+
     private float _timeSinceAttack;
     private bool _isAttacking = false;
+
+    private void Update()
+    {
+        _timeSinceAttack += Time.deltaTime;
+    }
 
     public void HandleAttack(float yAxis, float groundTime)
     {
@@ -59,7 +68,7 @@ public class Attack : MonoBehaviour, IAttack
         {
             if (objectsToHit[i].GetComponent<Enemy>() != null)
             {
-                objectsToHit[i].GetComponent<Enemy>().EnemyHit(_damage);
+                objectsToHit[i].GetComponent<Enemy>().EnemyHit(_damage, (transform.position - objectsToHit[i].transform.position).normalized, 100);
             }
         }
     }
@@ -83,10 +92,5 @@ public class Attack : MonoBehaviour, IAttack
         Gizmos.DrawWireCube(_sideAttackCheck.position, _sideAttackArea);
         Gizmos.DrawWireCube(_upAttackCheck.position, _upAttackArea);
         Gizmos.DrawWireCube(_downAttackCheck.position, _downAttackArea);
-    }
-
-    private void Update()
-    {
-        _timeSinceAttack += Time.deltaTime;
     }
 }

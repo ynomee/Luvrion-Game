@@ -403,10 +403,7 @@ public class PlayerMovement : MonoBehaviour
                 break;
             case "Attack":
                 if (context.action.phase == InputActionPhase.Started)
-                {
-                    _attack.HandleAttack(_moveInput.y, LastOnGroundTime);
-                    UpdateAttackAnimation();
-                }
+                    UpdateAttackState();
                 break;
         }
     }
@@ -429,7 +426,9 @@ public class PlayerMovement : MonoBehaviour
     private void UpdateYVelocity()
     {
         if (_playerModel == null) return;
+
         float verticalVel = RB.velocity.y;
+
         _playerModel.UpdateVerticalVelocity(verticalVel);
     }
     private void UpdateWallJumpAnimation()
@@ -446,9 +445,9 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
-    private void UpdateAttackAnimation()
+    private void UpdateAttackState()
     {
-        Debug.Log("Attack action tiggered");
+        _attack.HandleAttack(_moveInput.y, LastOnGroundTime);
         _playerModel.UpdateAttackState();
     }
 
