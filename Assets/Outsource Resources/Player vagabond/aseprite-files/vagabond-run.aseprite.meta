@@ -21,11 +21,13 @@ ScriptedImporter:
     convertToNormalMap: 0
     heightScale: 0.25
     normalMapFilter: 0
+    flipGreenChannel: 0
+    swizzle: 50462976
     isReadable: 0
     streamingMipmaps: 0
     streamingMipmapsPriority: 0
     vTOnly: 0
-    ignoreMasterTextureLimit: 0
+    ignoreMipmapLimit: 0
     nPOTScale: 1
     sRGBTexture: 1
     spriteMode: 2
@@ -75,7 +77,6 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -88,7 +89,6 @@ ScriptedImporter:
     defaultPivotSpace: 0
     defaultPivotAlignment: 7
     customPivotPosition: {x: 0.5, y: 0.5}
-    mosaicPadding: 4
     spritePadding: 0
     generateModelPrefab: 1
     generateAnimationClips: 1
@@ -288,72 +288,64 @@ ScriptedImporter:
     layerType: 0
     blendMode: 0
     cells:
-    - name: Frame_0
+    - name: vagabond-run_Frame_0
       frameIndex: 0
-      additiveSortOrder: 0
       cellRect:
         x: 18
         y: 0
         width: 18
         height: 21
       spriteId: 38d183ca55b6ea34b852a70fc6117024
-    - name: Frame_1
+    - name: vagabond-run_Frame_1
       frameIndex: 1
-      additiveSortOrder: 0
       cellRect:
         x: 18
         y: 2
         width: 18
         height: 20
       spriteId: e3d2d60285fff4641b5864b35b3402c1
-    - name: Frame_2
+    - name: vagabond-run_Frame_2
       frameIndex: 2
-      additiveSortOrder: 0
       cellRect:
         x: 20
         y: 0
         width: 16
         height: 20
       spriteId: 7779dd7bbe18b7a49b2973157f1d4c25
-    - name: Frame_3
+    - name: vagabond-run_Frame_3
       frameIndex: 3
-      additiveSortOrder: 0
       cellRect:
         x: 19
         y: 0
         width: 17
         height: 18
       spriteId: 6f23ce487af1e644bb494acd35af819b
-    - name: Frame_4
+    - name: vagabond-run_Frame_4
       frameIndex: 4
-      additiveSortOrder: 0
       cellRect:
         x: 18
         y: 0
         width: 18
         height: 21
       spriteId: c8f9ee91a72f2f44683daa5ec98bbd72
-    - name: Frame_5
+    - name: vagabond-run_Frame_5
       frameIndex: 5
-      additiveSortOrder: 0
       cellRect:
         x: 19
         y: 2
         width: 17
         height: 20
       spriteId: 7dbfed7ff9c5dba47b06d639aa79ad48
-    - name: Frame_6
+    - name: vagabond-run_Frame_6
       frameIndex: 6
-      additiveSortOrder: 0
       cellRect:
         x: 18
         y: 0
         width: 18
         height: 20
       spriteId: 308c4666474f31f4483262ff4ce93cce
-    - name: Frame_7
+    - name: vagabond-run_Frame_7
       frameIndex: 7
-      additiveSortOrder: 0
       cellRect:
         x: 20
         y: 0
@@ -365,6 +357,7 @@ ScriptedImporter:
   platformSettings:
   - name: Default
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -376,6 +369,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: DefaultTexturePlatform
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -387,6 +381,7 @@ ScriptedImporter:
     androidETC2FallbackOverride: 0
   - name: Standalone
     overridden: 0
+    ignorePlatformSupport: 0
     maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
@@ -396,7 +391,6 @@ ScriptedImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     androidETC2FallbackOverride: 0
-  generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
   canvasSize: {x: 64, y: 64}
