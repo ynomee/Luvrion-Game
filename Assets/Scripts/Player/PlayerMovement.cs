@@ -2,13 +2,13 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovement : MonoBehaviour, IPlayerMovement
 {
     //Scriptable object which holds all the player's movement parameters. If you don't want to use it
     //just paste in all the parameters, though you will need to manuly change all references in this script
     public PlayerData Data;
-
-
+    public PlayerStateList pState;
+    public static PlayerMovement Instance;
     #region COMPONENTS
     [SerializeField] private PlayerInput _playerInput;
     //[SerializeField] private Attack _attack;
@@ -29,6 +29,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsWallJumping { get; private set; }
     public bool IsDashing { get; private set; }
     public bool IsSliding { get; private set; }
+    public bool FacingRight { get; private set; }
 
     //Timers (also all fields, could be private and a method returning a bool could be used)
     public float LastOnGroundTime { get; private set; }
@@ -91,12 +92,11 @@ public class PlayerMovement : MonoBehaviour
     {
         _playerModel = model;
     }
-    
+
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
         AnimHandler = GetComponent<PlayerAnimator>();
-
         _playerInput.onActionTriggered += OnPlayerInputActionTriggered;
     }
 
@@ -555,7 +555,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rotator = new Vector3(transform.rotation.x, 180, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             IsFacingRight = !IsFacingRight;
-
+            pState.lookingRight = false;
             //turn the camera follow object
             _cameraFollowObject.CallTurn();
         }
@@ -564,7 +564,7 @@ public class PlayerMovement : MonoBehaviour
             Vector3 rotator = new Vector3(transform.rotation.x, 0, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             IsFacingRight = !IsFacingRight;
-
+            pState.lookingRight = true;
             //turn the camera follow object
             _cameraFollowObject.CallTurn();
         }

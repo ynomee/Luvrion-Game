@@ -4,21 +4,25 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private float _health;
+    [SerializeField] protected float _health;
 
-    [SerializeField] private float _recoilLenght;
-    [SerializeField] private float _recoilFactor;
-    [SerializeField] private bool _isRecoiling = false;
+    [SerializeField] protected float _recoilLenght;
+    [SerializeField] protected float _recoilFactor;
+    [SerializeField] protected bool _isRecoiling = false;
 
-    private Rigidbody2D _rb;
-    private float _recoilTimer;
+    [SerializeField] protected PlayerMovement _player;
+    [SerializeField] protected float _speed;
 
-    private void Awake()
+    protected Rigidbody2D _rb;
+    protected float _recoilTimer;
+
+    protected virtual void Start()
     {
+        _player = PlayerMovement.Instance;
         _rb = GetComponent<Rigidbody2D>();
     }
 
-    private void Update()
+    protected virtual void Update()
     {
         if (_health <= 0)
         {
@@ -28,19 +32,20 @@ public class Enemy : MonoBehaviour
         RecoilCheck();
     }
 
-    public void EnemyHit(float damageDone, Vector2 hitDirection, float hitForce)
+    public virtual void EnemyHit(float damageDone, Vector2 hitDirection, float hitForce)
     {
         _health -= damageDone;
 
-        if(!_isRecoiling)
+        if (!_isRecoiling)
         {
             // Enemy recoil in the direction that the hit comes from
             _rb.AddForce(-hitForce * _recoilFactor * hitDirection);
+            _isRecoiling = true;
         }
 
     }
 
-    private void RecoilCheck()
+    protected virtual void RecoilCheck()
     {
         if (_isRecoiling)
         {

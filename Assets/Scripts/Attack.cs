@@ -20,8 +20,20 @@ public class Attack : MonoBehaviour, IAttack
     [SerializeField] private float _damage;
     [SerializeField] private float _timeBetweenAttack;
 
+    public Recoil _recoil;
+    public PlayerStateList pState;
+
     private float _timeSinceAttack;
     private bool _isAttacking = false;
+
+    private void Awake()
+    {
+        _recoil = GetComponent<Recoil>();
+        if (_recoil == null)
+        {
+            Debug.LogError("Recoil не найден на объекте игрока!");
+        }
+    }
 
     private void Update()
     {
@@ -40,35 +52,49 @@ public class Attack : MonoBehaviour, IAttack
 
         if (yAxis == 0 || yAxis < 0 && groundTime > 0)
         {
-            PlayerHit(_sideAttackCheck, _sideAttackArea);
+            PlayerHit(_sideAttackCheck, _sideAttackArea, ref pState.recoilingX, _recoil._recoilXSpeed);
             Instantiate(_splashEffect, _sideAttackCheck);
+            Debug.Log($"Recoil Triggered: {pState.recoilingX}, LookingRight: {pState.lookingRight}");
         }
         else if (yAxis > 0)
         {
-            PlayerHit(_upAttackCheck, _upAttackArea);
+            //PlayerHit(_upAttackCheck, _upAttackArea);
             SplashEffectAngle(_splashEffect, 80, _upAttackCheck);
         }
         else if (yAxis < 0 && groundTime < 0)
         {
-            PlayerHit(_downAttackCheck, _downAttackArea);
+            //PlayerHit(_downAttackCheck, _downAttackArea);
             SplashEffectAngle(_splashEffect, -90, _downAttackCheck);
         }
         
         StartCoroutine(EndAttack());
     }
 
-    private void PlayerHit(Transform attackTransform, Vector2 attackArea)
+    private void PlayerHit(Transform attackTransform, Vector2 attackArea, ref bool recoilDir, float recoilStrength)
     {
         Collider2D[] objectsToHit = Physics2D.OverlapBoxAll(attackTransform.position, attackArea, 0, _attackableLayer);
 
+        List<Enemy> hitEnemies = new List<Enemy>();
+
         if(objectsToHit.Length > 0)
-            Debug.Log("Hit"); 
+        {
+            Debug.Log("Hit");     
+                // Триггерим отдачу
+            recoilDir = true;
+            pState.recoilingX = true;
+                //_recoil._recoilingX = true;
+
+        }
 
         for (int i = 0; i < objectsToHit.Length; i++)
         {
-            if (objectsToHit[i].GetComponent<Enemy>() != null)
+            Enemy e = objectsToHit[i].GetComponent<Enemy>();
+
+            if (e && !hitEnemies.Contains(e))
             {
-                objectsToHit[i].GetComponent<Enemy>().EnemyHit(_damage, (transform.position - objectsToHit[i].transform.position).normalized, 100);
+                e.EnemyHit(_damage, (transform.position - objectsToHit[i].transform.position).normalized, recoilStrength);
+
+                hitEnemies.Add(e);
             }
         }
     }
