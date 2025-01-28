@@ -7,8 +7,10 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     //Scriptable object which holds all the player's movement parameters. If you don't want to use it
     //just paste in all the parameters, though you will need to manuly change all references in this script
     public PlayerData Data;
+    //Temporary test player state list
     public PlayerStateList pState;
-    public static PlayerMovement Instance;
+    public Recoil recoil;
+
     #region COMPONENTS
     [SerializeField] private PlayerInput _playerInput;
     //[SerializeField] private Attack _attack;
@@ -17,7 +19,6 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 
     public Rigidbody2D RB { get; private set; }
     //Script to handle all player animations, all references can be safely removed if you're importing into your own project.
-    public PlayerAnimator AnimHandler { get; private set; }
     #endregion
 
     #region STATE PARAMETERS
@@ -96,8 +97,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     private void Awake()
     {
         RB = GetComponent<Rigidbody2D>();
-        AnimHandler = GetComponent<PlayerAnimator>();
-        _playerInput.onActionTriggered += OnPlayerInputActionTriggered;
+        _playerInput.onActionTriggered += OnPlayerInputActionTriggered;    
     }
 
     private void Start()
@@ -333,6 +333,8 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
             UpdateWallJumpAnimation();
         }
         #endregion
+        recoil.HandleRecoil(_moveInput.y, _bonusJumpsLeft, RB.gravityScale, LastOnGroundTime);
+        
     }
 
     private void LateUpdate()

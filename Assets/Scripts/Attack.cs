@@ -31,7 +31,7 @@ public class Attack : MonoBehaviour, IAttack
         _recoil = GetComponent<Recoil>();
         if (_recoil == null)
         {
-            Debug.LogError("Recoil не найден на объекте игрока!");
+            Debug.LogError("Recoil пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ!");
         }
     }
 
@@ -54,17 +54,18 @@ public class Attack : MonoBehaviour, IAttack
         {
             PlayerHit(_sideAttackCheck, _sideAttackArea, ref pState.recoilingX, _recoil._recoilXSpeed);
             Instantiate(_splashEffect, _sideAttackCheck);
-            Debug.Log($"Recoil Triggered: {pState.recoilingX}, LookingRight: {pState.lookingRight}");
+            Debug.Log($"RecoilX Triggered: {pState.recoilingX}, LookingRight: {pState.lookingRight}");
         }
         else if (yAxis > 0)
         {
-            //PlayerHit(_upAttackCheck, _upAttackArea);
+            PlayerHit(_upAttackCheck, _upAttackArea, ref pState.recoilingY, _recoil._recoilYSpeed);
             SplashEffectAngle(_splashEffect, 80, _upAttackCheck);
         }
         else if (yAxis < 0 && groundTime < 0)
         {
-            //PlayerHit(_downAttackCheck, _downAttackArea);
+            PlayerHit(_downAttackCheck, _downAttackArea, ref pState.recoilingY, _recoil._recoilYSpeed);
             SplashEffectAngle(_splashEffect, -90, _downAttackCheck);
+            Debug.Log($"RecoilY Triggered: {pState.recoilingY}");
         }
         
         StartCoroutine(EndAttack());
@@ -79,11 +80,8 @@ public class Attack : MonoBehaviour, IAttack
         if(objectsToHit.Length > 0)
         {
             Debug.Log("Hit");     
-                // Триггерим отдачу
+                // пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅ
             recoilDir = true;
-            pState.recoilingX = true;
-                //_recoil._recoilingX = true;
-
         }
 
         for (int i = 0; i < objectsToHit.Length; i++)
