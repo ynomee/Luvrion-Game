@@ -6,6 +6,8 @@ public class Enemy : MonoBehaviour
 {
     protected PlayerStateList pState;
     protected HealthComponent healthComponent;
+    protected TimeRestore timeRestore;
+
     [SerializeField] protected float health;
 
     [SerializeField] protected float recoilLenght;
@@ -28,6 +30,7 @@ public class Enemy : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         healthComponent = playerObj.GetComponent<HealthComponent>();
         pState = playerObj.GetComponent<PlayerStateList>();
+        timeRestore = playerObj.GetComponent<TimeRestore>();
     }
 
     protected virtual void Update()
@@ -79,6 +82,7 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player") && !pState.invinsible)
         {
             Attack();
+            timeRestore.HitStopTime(0, 5, 0.5f);
         }
     }
 

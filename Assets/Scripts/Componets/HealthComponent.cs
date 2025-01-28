@@ -10,6 +10,9 @@ public class HealthComponent : MonoBehaviour
     [SerializeField] private int _health;
     [SerializeField] private int _maxHealth;
 
+    [Header("Visual Effects")]
+    [SerializeField] GameObject _bloodSpurt;
+
     private void Awake()
     {
         Health = _maxHealth;
@@ -41,6 +44,10 @@ public class HealthComponent : MonoBehaviour
     private IEnumerator StopTakingDamage()
     {
         pState.invinsible = true;
+        
+        // Blood particle system instantiation
+        GameObject bloodSpurtParticles = Instantiate(_bloodSpurt, transform.position, Quaternion.identity);
+        Destroy(bloodSpurtParticles, 1.5f);
 
         yield return new WaitForSeconds(1f);
 
