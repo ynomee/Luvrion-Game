@@ -19,7 +19,7 @@ public class TimeRestore : MonoBehaviour
         {
             if (Time.timeScale < 1)
             {
-                Time.timeScale += Time.deltaTime * _restoreTimeSpeed;
+                Time.timeScale += Time.unscaledDeltaTime * _restoreTimeSpeed;
             }
             else 
             {
@@ -47,8 +47,7 @@ public class TimeRestore : MonoBehaviour
 
     private IEnumerator StartTimeAgain(float delay)
     {
+        yield return new WaitForSecondsRealtime(delay);
         _restoreTime = true;
-
-        yield return new WaitForSeconds(delay);
     }
 }

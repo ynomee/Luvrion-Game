@@ -7,15 +7,17 @@ public class HealthComponent : MonoBehaviour
     public PlayerStateList pState;
 
     [Header("Health Settings")]
+    public int maxHealth;
     [SerializeField] private int _health;
-    [SerializeField] private int _maxHealth;
+    public delegate void OnHealthChangedDelegate();
+    [HideInInspector] public OnHealthChangedDelegate onHealthChangeCallback;
 
     [Header("Visual Effects")]
     [SerializeField] GameObject _bloodSpurt;
 
     private void Awake()
     {
-        Health = _maxHealth;
+        Health = maxHealth;
     }
 
     public void TakeDamage(float damage)
@@ -36,7 +38,12 @@ public class HealthComponent : MonoBehaviour
         {
             if (_health != value)
             {
-                _health = Mathf.Clamp(value, 0, _maxHealth);
+                _health = Mathf.Clamp(value, 0, maxHealth);
+
+                if (onHealthChangeCallback != null)
+                {
+                    onHealthChangeCallback.Invoke();
+                }
             }
         }
     }
