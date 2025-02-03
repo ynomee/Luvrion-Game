@@ -7,10 +7,11 @@ public class HealthComponent : MonoBehaviour
     public PlayerStateList pState;
 
     [Header("Health Settings")]
-    public int maxHealth;
     [SerializeField] private int _health;
     public delegate void OnHealthChangedDelegate();
     [HideInInspector] public OnHealthChangedDelegate onHealthChangeCallback;
+    
+    public int maxHealth;
 
     [Header("Visual Effects")]
     [SerializeField] GameObject _bloodSpurt;

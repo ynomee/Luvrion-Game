@@ -280,12 +280,14 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         #endregion
 
         #region UPDATE VERTICAL VELOCITY
-        UpdateYVelocity();
+        //UpdateYVelocity();
         #endregion
     }
 
     private void FixedUpdate()
     {
+        UpdateYVelocity();
+
         //Handle Run
         if (!IsDashing)
         {
@@ -401,6 +403,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
                 }
                 break;
             case "Dash":
+                if(context.action.phase == InputActionPhase.Started)
                 OnDashInput();
                 break;
             case "Attack":
@@ -429,9 +432,9 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     {
         if (_playerModel == null) return;
 
-        float verticalVel = RB.velocity.y;
+        //float verticalVel = RB.velocity.y;
 
-        _playerModel.UpdateVerticalVelocity(verticalVel);
+        _playerModel.UpdateVerticalVelocity(RB.velocity.y);
     }
     private void UpdateWallJumpAnimation()
     {

@@ -11,26 +11,6 @@ public class PlayerView : MonoBehaviour, IPlayerObserver
         model.RegisterObserver(this);
     }
 
-    //public PlayerModel _playerModel;
-
-    // private void Awake()
-    // {
-    //     // ������������ ���� ������ ��� �����������
-    //     if (_playerModel != null)
-    //     {
-    //         _playerModel.RegisterObserver(this);
-    //     }
-    // }
-
-    // private void OnDestroy()
-    // {
-    //     // ������������ �� ������, ����� �������� ������
-    //     if (_playerModel != null)
-    //     {
-    //         _playerModel.UnregisterObserver(this);
-    //     }
-    // }
-
     public void OnSpeedChanged(float speed)
     {
         _animator.SetFloat("Move", Mathf.Abs(speed));

@@ -8,7 +8,6 @@ public class Recoil : MonoBehaviour
     private IPlayerMovement _playerMovement;
     private IRigidbodyAdapter _rigidbodyAdapter;
 
-
     [Header("Recoil")]
     [SerializeField] private int _recoilXSteps = 5;
     [SerializeField] private int _recoilYSteps = 5;
@@ -20,21 +19,6 @@ public class Recoil : MonoBehaviour
     public PlayerStateList pState;
     [SerializeField] private Rigidbody2D rb;
     private float _defaultGravity;
-
-    private void Awake()
-    {
-
-    }
-
-    private void Start()
-    {
-    
-    }
-
-    private void FixedUpdate()
-    {
-
-    }
 
     public void HandleRecoil(float yAxis, float bonusJumpsLeft, float gravityScale, float lastOnGroundTime)
     {
