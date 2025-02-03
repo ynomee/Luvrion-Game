@@ -20,10 +20,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float damage;
 
     //[SerializeField] protected float distance;
-    [SerializeField] protected float distanceBetween = 4;
+    //[SerializeField] protected float distanceBetween = 4;
 
     protected Rigidbody2D rb;
     protected float recoilTimer;
+
+    protected enum EnemyStates
+    {
+        //Templar
+        Templar_IDLE,
+        Templar_Charge,
+        Templar_Combat,
+        Templar_LeaveFight,
+        Templar_Death
+
+    }
+
+    protected EnemyStates currentEnemyState;
 
     protected virtual void Start()
     {
@@ -35,7 +48,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void Update()
     {
-
+        UpdateEnemyState();
         EnemyDeath();
         RecoilCheck();
     }
@@ -89,5 +102,12 @@ public class Enemy : MonoBehaviour
     protected virtual void Attack()
     {
         healthComponent.TakeDamage(damage);
+    }
+
+    protected virtual void UpdateEnemyState() { }
+
+    protected virtual void ChangeState(EnemyStates newState)
+    {
+        currentEnemyState = newState;
     }
 }
