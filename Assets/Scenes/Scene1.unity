@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028326, g: 0.22571333, b: 0.30692202, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -842,10 +842,11 @@ Transform:
   m_GameObject: {fileID: 607976809}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -83.8, y: 54.5, z: 0.01227826}
+  m_LocalPosition: {x: -83.8, y: 53.08, z: 0.01227826}
   m_LocalScale: {x: 1, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 1604856049}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &607976812
@@ -932,16 +933,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ca510f2563659c47bc62b04f1407bd5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 10
+  health: 20
   recoilLenght: 0.5
   recoilFactor: 2
   isRecoiling: 0
   playerObj: {fileID: 1148728712}
-  speed: 4
+  speed: 5
   damage: 1
+  _EnemySideAttackCheck: {fileID: 1604856049}
+  _EnemySideAttackArea: {x: 2.5, y: 2}
+  _splashEffect: {fileID: 1324108400477190046, guid: 33f3d43f9b5f049b6be2b9328c222846, type: 3}
   _spawnPoint: {x: -83, y: 55}
   _distance: 0
-  _combatExitTimer: 0
 --- !u!61 &607976815
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4715,7 +4718,7 @@ Transform:
   m_GameObject: {fileID: 963194225}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -107.649635, y: 65.81193, z: -10}
+  m_LocalPosition: {x: -101.00102, y: 65.81191, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4775,7 +4778,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1012237143
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4795,9 +4798,11 @@ MonoBehaviour:
   playerObj: {fileID: 1148728712}
   speed: 4
   damage: 1
+  _EnemySideAttackCheck: {fileID: 0}
+  _EnemySideAttackArea: {x: 0, y: 0}
+  _splashEffect: {fileID: 0}
   _spawnPoint: {x: 4, y: 64}
   _distance: 0
-  _combatExitTimer: 0
 --- !u!50 &1012237144
 Rigidbody2D:
   serializedVersion: 4
@@ -5198,7 +5203,7 @@ Transform:
   m_GameObject: {fileID: 1148728712}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 28, y: 89.7, z: 0}
+  m_LocalPosition: {x: -108, y: 54.4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5687,6 +5692,21 @@ MonoBehaviour:
   m_Damping: 2
   m_MaxWindowSize: 8
   m_Padding: 0
+--- !u!4 &1604856049
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1873947638}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.97, y: 0.14, z: 0}
+  m_LocalScale: {x: 1, y: 0.5, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 607976811}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1616037568
 GameObject:
   m_ObjectHideFlags: 0
@@ -56306,6 +56326,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _destination: {fileID: 1966356298}
+--- !u!1 &1873947638
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1604856049}
+  m_Layer: 7
+  m_Name: Enemy Side Attack Check
+  m_TagString: Untagged
+  m_Icon: {fileID: -5442936267250999957, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1892478824
 GameObject:
   m_ObjectHideFlags: 0

@@ -7,15 +7,14 @@ public class Templar : Enemy
 {
     [SerializeField] private Vector2 _spawnPoint;
     [SerializeField] private float _distance;
-    [SerializeField] private float _combatExitTimer;
 
-    private bool _movingRight = true;
+    private bool _isInCombat = false;
+    private bool _isReturning = false;
 
-    private float _attackCooldown = 1.5f; // ����������� ����� (� ��������)
-    private float _lastAttackTime = 0;
+    private Coroutine _combatCoroutine;
+    private Coroutine _exitTimerCoroutine;
 
-    private Vector2 _leftLimit, _rightLimit; // ������� �������� � ���
-    private float _patrolDistance = 2f; // ���������� ��������������
+
 
     protected override void Start()
     {
@@ -25,35 +24,7 @@ public class Templar : Enemy
         _spawnPoint = transform.position;
 
         ChangeState(EnemyStates.Templar_IDLE);
-
-        _leftLimit = new Vector2(_spawnPoint.x - _patrolDistance, transform.position.y);
-        _rightLimit = new Vector2(_spawnPoint.x + _patrolDistance, transform.position.y);
     }
-
-    //protected override void Update()
-    //{
-    //    base.Update();
-
-    //    EnemyFollow();
-    //}
-
-    //private void EnemyFollow()
-    //{
-    //    if (!isRecoiling)
-    //    {
-    //        distance = Vector2.Distance(transform.position, playerObj.transform.position);
-    //        Vector2 direction = playerObj.transform.position - transform.position;
-    //        direction.Normalize();
-
-    //        if (distance < distanceBetween)
-    //        {
-    //            transform.position = Vector2.MoveTowards(this.transform.position, new Vector2(playerObj.transform.position.x, transform.position.y), speed * Time.deltaTime);
-    //        }
-
-    //        // transform.position = Vector2.MoveTowards
-    //        //     (transform.position, new Vector2(PlayerMovement.Instance.transform.position.x, transform.position.y), speed * Time.deltaTime);
-    //    }
-    //}
 
     protected override void UpdateEnemyState()
     {
@@ -62,43 +33,27 @@ public class Templar : Enemy
         switch(currentEnemyState)
         {
             case EnemyStates.Templar_IDLE:
-                {
-                    
-                    if (_distance < 7)
-                    {
-                        Debug.Log("Player entered combat range, switching to Templar_Combat");
-                        ChangeState(EnemyStates.Templar_Combat);
-                    }
+                {           
+                    if (_distance < 12)                  
+                        EnterCombat();                   
                     break;
                 }
             case EnemyStates.Templar_Combat:
                 {
-                    if (_distance <= 5 && Time.time > _lastAttackTime + _attackCooldown)
+                    if (_distance > 12)
                     {
-                        Attack();
-                        _lastAttackTime = Time.time;
-                    }
-                    else
-                    {
-                        CombatMovement();
-                    }
-
-                    if (_distance > 10)
-                    {
-                        if (_combatExitTimer == 0)
+                        if (_exitTimerCoroutine == null)
                         {
-                            _combatExitTimer = Time.time;
+                            _exitTimerCoroutine = StartCoroutine(ExitCombatTimer());
                         }
-
-                        if (Time.time - _combatExitTimer >= 3f)
+                        else
                         {
-                            Debug.Log("Combat exit timer finished, switching to Templar_LeaveFight");
-                            ChangeState(EnemyStates.Templar_LeaveFight);
+                            if (_exitTimerCoroutine != null)
+                            {
+                                StopCoroutine(ExitCombatTimer());
+                                _exitTimerCoroutine = null;
+                            }
                         }
-                    }
-                    else
-                    {
-                        _combatExitTimer = 0f;
                     }
                     break;
                 }
@@ -115,34 +70,149 @@ public class Templar : Enemy
         }
     }
 
-    private void CombatMovement()
+    private void EnterCombat()
     {
-        if (!isRecoiling)
+        ChangeState(EnemyStates.Templar_Combat);
+
+        _isInCombat = true;
+
+        if (_combatCoroutine == null)
+            _combatCoroutine = StartCoroutine(CombatBehaviour());
+    }
+
+    private IEnumerator CombatBehaviour()
+    {
+        while(_isInCombat)
         {
-            float moveDirection = _movingRight ? 1 : -1;
+            FacePlayer();
 
-            rb.velocity = new Vector2(moveDirection * speed, rb.velocity.y);
+            float waitTime = Random.Range(3, 5);
+            yield return new WaitForSeconds(waitTime);
 
-            Vector2 targetPos = _movingRight ? _rightLimit : _leftLimit;
-
-            if (Mathf.Abs(transform.position.x - targetPos.x) < 0.1f)
+            if (_distance < 5)
             {
-                _movingRight = !_movingRight;
+                Attack();
+                Instantiate(_splashEffect, _EnemySideAttackCheck);
+                timeRestore.HitStopTime(0, 5, 0.5f);
             }
 
+            if (_distance > 5 && _distance <= 12)
+            {
+                yield return StartCoroutine(ChargeAttack());
+            }
+            else
+            {
+                yield return StartCoroutine(RandomMovement());
+            }
         }
+    }
+
+    private IEnumerator RandomMovement()
+    {
+        ChangeState(EnemyStates.Templar_Combat);
+        FacePlayer();
+
+        float moveTime = Random.Range(1f, 1.5f);
+        float direction = Random.Range(0, 2) == 0 ? -1f : 1f; // Лево или право
+
+    // Если враг слева от игрока, направление движения сохраняется (+1 вперед, -1 назад)
+    if (playerObj.transform.position.x > transform.position.x)
+    {
+        direction = (Random.Range(0, 2) == 0) ? 1f : -1f; // 50% вперед, 50% назад
+    }
+    else
+    {
+        direction = (Random.Range(0, 2) == 0) ? -1f : 1f; // 50% назад, 50% вперед
+    }
+        //
+        rb.velocity = new Vector2(direction * speed * 0.5f, rb.velocity.y);
+
+        yield return new WaitForSeconds(moveTime);
+
+        rb.velocity = Vector2.zero;
+    }
+
+    private IEnumerator ChargeAttack()
+    {
+        ChangeState(EnemyStates.Templar_Charge);
+        FacePlayer();
+
+        float chargeSpeed = speed * Random.Range(2f, 3f);
+        Vector2 direction = (playerObj.transform.position - transform.position).normalized;
+
+        //
+        rb.velocity = new Vector2(direction.x * chargeSpeed, rb.velocity.y);
+
+        //Charge time
+        yield return new WaitForSeconds(1.5f);
+
+        rb.velocity = Vector2.zero;
+        ChangeState(EnemyStates.Templar_Combat);
+    }
+
+    private IEnumerator ExitCombatTimer()
+    {
+        yield return new WaitForSeconds(3f);
+
+        if(_distance > 10)
+            ExitCombat();
+
+    }
+
+    private void ExitCombat()
+    {
+        _isInCombat = false;
+
+        if(_combatCoroutine != null)
+        {
+            StopCoroutine(_combatCoroutine);
+            _combatCoroutine = null;
+        }
+
+        ChangeState(EnemyStates.Templar_LeaveFight);
     }
 
     private void ReturnToSpawn()
     {
-        Vector2 targetPos = new Vector2(_spawnPoint.x, transform.position.y);
-        transform.position = Vector2.MoveTowards(transform.position, targetPos, speed / 2f * Time.deltaTime);
-
-        if (Vector2.Distance(transform.position, _spawnPoint) == _spawnPoint.x)
-        {
-            ChangeState(EnemyStates.Templar_IDLE);
-            
-            _combatExitTimer = 0;
-        }
+        if (_isReturning) return;
+        _isReturning = true;
+        StartCoroutine(MoveToSpawn());
     }
+
+    private IEnumerator MoveToSpawn()
+    {
+        Debug.Log("Starting return to spawn");
+
+        while (Vector2.Distance(transform.position, _spawnPoint) > 0.1f)
+        {
+        //После возврата проверить, если игрок снова рядом, сразу перейти в бой
+            if (playerObj != null && Vector2.Distance(transform.position, playerObj.transform.position) < 12)
+            {
+                Debug.Log("Player is near, fight state again");
+                //_isReturning = false;
+                EnterCombat();
+            }
+
+            Vector2 direction = (_spawnPoint - (Vector2)transform.position).normalized;
+            //
+            rb.velocity = direction * (speed / 2);
+            yield return null;
+        }
+
+        rb.velocity = Vector2.zero;
+        _isReturning = false;
+        ChangeState(EnemyStates.Templar_IDLE);
+
+        Debug.Log("Enemy reached spawn point");
+    }
+
+    private void FacePlayer()
+    {
+        if (playerObj == null) return;
+
+        Vector3 scale = transform.localScale;
+        scale.x = (playerObj.transform.position.x > transform.position.x) ? Mathf.Abs(scale.x) : -Mathf.Abs(scale.x);
+        transform.localScale = scale;
+    }
+
 }

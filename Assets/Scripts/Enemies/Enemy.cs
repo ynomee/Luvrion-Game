@@ -19,6 +19,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
 
+    [SerializeField] protected Transform _EnemySideAttackCheck;
+    [SerializeField] protected Vector2 _EnemySideAttackArea;
+    [SerializeField] protected GameObject _splashEffect;
+
     //[SerializeField] protected float distance;
     //[SerializeField] protected float distanceBetween = 4;
 
@@ -46,9 +50,13 @@ public class Enemy : MonoBehaviour
         timeRestore = playerObj.GetComponent<TimeRestore>();
     }
 
-    protected virtual void Update()
+    protected virtual void FixedUpdate()
     {
         UpdateEnemyState();
+    }
+
+    protected virtual void Update()
+    {
         EnemyDeath();
         RecoilCheck();
     }
@@ -109,5 +117,10 @@ public class Enemy : MonoBehaviour
     protected virtual void ChangeState(EnemyStates newState)
     {
         currentEnemyState = newState;
+    }
+        private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(_EnemySideAttackCheck.position, _EnemySideAttackArea);
     }
 }
