@@ -92,7 +92,7 @@ public class Templar : Enemy
             if (_distance < 5)
             {
                 Attack();
-                Instantiate(_splashEffect, _EnemySideAttackCheck);
+                Instantiate(_splashEffect, _enemySideAttackCheck);
                 timeRestore.HitStopTime(0, 5, 0.5f);
             }
 
@@ -143,6 +143,8 @@ public class Templar : Enemy
         //
         rb.velocity = new Vector2(direction.x * chargeSpeed, rb.velocity.y);
 
+
+        Instantiate(_chargeEffect, _enemyChargeCheck);
         //Charge time
         yield return new WaitForSeconds(1.5f);
 
@@ -196,6 +198,7 @@ public class Templar : Enemy
             Vector2 direction = (_spawnPoint - (Vector2)transform.position).normalized;
             //
             rb.velocity = direction * (speed / 2);
+
             yield return null;
         }
 

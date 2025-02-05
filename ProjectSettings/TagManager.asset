@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Enemy
   - Teleporter
+  - Death
   layers:
   - Default
   - TransparentFX

@@ -19,9 +19,13 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
 
-    [SerializeField] protected Transform _EnemySideAttackCheck;
-    [SerializeField] protected Vector2 _EnemySideAttackArea;
+    [SerializeField] protected Transform _enemySideAttackCheck;
+    [SerializeField] protected Vector2 _enemySideAttackArea;
     [SerializeField] protected GameObject _splashEffect;
+
+    [SerializeField] protected GameObject _chargeEffect;
+    [SerializeField] protected Vector2 _enemyChargeAttackArea;
+    [SerializeField] protected Transform _enemyChargeCheck;
 
     //[SerializeField] protected float distance;
     //[SerializeField] protected float distanceBetween = 4;
@@ -65,7 +69,7 @@ public class Enemy : MonoBehaviour
     {
         health -= damageDone;
 
-        if (!isRecoiling)
+        if (!isRecoiling && currentEnemyState != EnemyStates.Templar_Charge)
         {
             // Enemy recoil in the direction that the hit comes from
             rb.AddForce(-hitForce * recoilFactor * hitDirection);
@@ -121,6 +125,8 @@ public class Enemy : MonoBehaviour
         private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(_EnemySideAttackCheck.position, _EnemySideAttackArea);
+        Gizmos.DrawWireCube(_enemySideAttackCheck.position, _enemySideAttackArea);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawWireCube(_enemyChargeCheck.position, _enemyChargeAttackArea);
     }
 }
