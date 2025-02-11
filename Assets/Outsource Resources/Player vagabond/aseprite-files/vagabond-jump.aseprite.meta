@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: vagabond-jump_Frame_0
     originalName: 
     pivot: {x: 0.625, y: -0.90909094}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 37
       width: 8
       height: 22
-    spriteID: 9f64d6fd5e6693b4c8cb0c59f68a50c6
+    spriteID: d45f6241a980c4e0fba6cb929609165b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,7 +139,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 37}
-  - name: Frame_1
+  - name: vagabond-jump_Frame_1
     originalName: 
     pivot: {x: 0.5625, y: -1}
     alignment: 9
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 4
       width: 16
       height: 21
-    spriteID: 5887a978fedcab74da407b4709b28bfc
+    spriteID: 010805d5eadd748bca1e9c4aaf94b854
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,7 +159,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 30, y: 4}
-  - name: Frame_2
+  - name: vagabond-jump_Frame_2
     originalName: 
     pivot: {x: 0.6111111, y: -0.79999995}
     alignment: 9
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 4
       width: 18
       height: 25
-    spriteID: eacaf83d154f41e4ea4b16108207e14d
+    spriteID: 98bbdba2feea54fb2860f09e8120724f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -195,7 +195,7 @@ ScriptedImporter:
         y: 20
         width: 8
         height: 22
-      spriteId: 9f64d6fd5e6693b4c8cb0c59f68a50c6
+      spriteId: d45f6241a980c4e0fba6cb929609165b
     - name: vagabond-jump_Frame_1
       frameIndex: 1
       cellRect:
@@ -203,7 +203,7 @@ ScriptedImporter:
         y: 21
         width: 16
         height: 21
-      spriteId: 5887a978fedcab74da407b4709b28bfc
+      spriteId: 010805d5eadd748bca1e9c4aaf94b854
     - name: vagabond-jump_Frame_2
       frameIndex: 2
       cellRect:
@@ -211,7 +211,7 @@ ScriptedImporter:
         y: 20
         width: 18
         height: 25
-      spriteId: eacaf83d154f41e4ea4b16108207e14d
+      spriteId: 98bbdba2feea54fb2860f09e8120724f
     linkedCells: []
     parentIndex: -1
   platformSettings:

@@ -46,9 +46,15 @@ public class Enemy : MonoBehaviour
 
     protected EnemyStates currentEnemyState;
 
+    protected virtual void Awake()
+    {
+        Physics2D.IgnoreCollision(playerObj.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
+    }
+
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+
         healthComponent = playerObj.GetComponent<HealthComponent>();
         pState = playerObj.GetComponent<PlayerStateList>();
         timeRestore = playerObj.GetComponent<TimeRestore>();
@@ -57,6 +63,7 @@ public class Enemy : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         UpdateEnemyState();
+        
     }
 
     protected virtual void Update()
@@ -98,6 +105,7 @@ public class Enemy : MonoBehaviour
             {
                 isRecoiling = false;
                 recoilTimer = 0;
+                rb.velocity = Vector2.zero;
             }
         }
     }

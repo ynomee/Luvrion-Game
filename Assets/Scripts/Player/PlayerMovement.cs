@@ -112,8 +112,66 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         _attack = GetComponent<IAttack>();
     }
 
+    private void FixedUpdate()
+    {
+        if (pState.cutScene) return;
+
+        UpdateYVelocity();
+
+        //Handle Run
+        if (!IsDashing)
+        {
+            UpdateDashAnimation();
+
+            if (IsWallJumping)
+            {
+                Run(Data.wallJumpRunLerp);
+            }
+            else
+            {
+                Run(1);
+            }
+        }
+        else if (_isDashAttacking)
+        {
+            Run(Data.dashEndRunLerp);
+        }
+
+        //Handle Slide
+        if (IsSliding)
+            Slide();
+
+        #region COLLISION CHECKS
+        if (!IsDashing && !IsJumping)
+        {
+            // Ground Check
+            if (CheckOverlap(_groundCheckPoint.position, _groundCheckSize, _groundLayer))
+            {
+                if (LastOnGroundTime < -0.1f)
+                {
+                    // �������� AnimHandler.justLanded = true;
+                    UpdateJumpAnimation();
+                }
+
+                LastOnGroundTime = Data.coyoteTime; // if so sets the lastGrounded to coyoteTime
+            }
+
+            // Wall Checks
+            LastOnWallRightTime = CheckWall(IsFacingRight, _frontWallCheckPoint.position, _backWallCheckPoint.position, _wallCheckSize, _groundLayer);
+            LastOnWallLeftTime = CheckWall(!IsFacingRight, _frontWallCheckPoint.position, _backWallCheckPoint.position, _wallCheckSize, _groundLayer);
+
+            // Update LastOnWallTime
+            LastOnWallTime = Mathf.Max(LastOnWallLeftTime, LastOnWallRightTime);
+            UpdateWallJumpAnimation();
+        }
+        #endregion
+        recoil.HandleRecoil(_moveInput.y, _bonusJumpsLeft, RB.gravityScale, LastOnGroundTime);
+
+    }
+
     private void Update()
     {
+        if (pState.cutScene) return;
         #region TIMERS
         LastOnGroundTime -= Time.deltaTime;
         LastOnWallTime -= Time.deltaTime;
@@ -284,60 +342,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         #endregion
     }
 
-    private void FixedUpdate()
-    {
-        UpdateYVelocity();
 
-        //Handle Run
-        if (!IsDashing)
-        {
-            UpdateDashAnimation();
-
-            if (IsWallJumping)
-            {
-                Run(Data.wallJumpRunLerp);
-            }
-            else
-            {
-                Run(1);
-            }
-        }
-        else if (_isDashAttacking)
-        {
-            Run(Data.dashEndRunLerp);
-        }
-
-        //Handle Slide
-        if (IsSliding)
-            Slide();
-
-        #region COLLISION CHECKS
-        if (!IsDashing && !IsJumping)
-        {
-            // Ground Check
-            if (CheckOverlap(_groundCheckPoint.position, _groundCheckSize, _groundLayer))
-            {
-                if (LastOnGroundTime < -0.1f)
-                {
-                    // �������� AnimHandler.justLanded = true;
-                    UpdateJumpAnimation();
-                }
-
-                LastOnGroundTime = Data.coyoteTime; // if so sets the lastGrounded to coyoteTime
-            }
-
-            // Wall Checks
-            LastOnWallRightTime = CheckWall(IsFacingRight, _frontWallCheckPoint.position, _backWallCheckPoint.position, _wallCheckSize, _groundLayer);
-            LastOnWallLeftTime = CheckWall(!IsFacingRight, _frontWallCheckPoint.position, _backWallCheckPoint.position, _wallCheckSize, _groundLayer);
-
-            // Update LastOnWallTime
-            LastOnWallTime = Mathf.Max(LastOnWallLeftTime, LastOnWallRightTime);
-            UpdateWallJumpAnimation();
-        }
-        #endregion
-        recoil.HandleRecoil(_moveInput.y, _bonusJumpsLeft, RB.gravityScale, LastOnGroundTime);
-        
-    }
 
     private void LateUpdate()
     {
@@ -552,7 +557,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
 		*/
     }
 
-    private void Turn()
+    public void Turn()
     {
         //flips player by rotating the "y" axis by 180 degress 
         if (IsFacingRight)

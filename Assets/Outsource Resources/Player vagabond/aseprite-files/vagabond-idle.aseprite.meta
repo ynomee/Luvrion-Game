@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: vagabond-idle_Frame_0
     originalName: 
     pivot: {x: 0.6, y: 0}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 10
       height: 21
-    spriteID: 5ded0117e092b744b866cfad3b779b2a
+    spriteID: 9df2ae3f04c214b67a7235d9b859f0a4
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,7 +139,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_1
+  - name: vagabond-idle_Frame_1
     originalName: 
     pivot: {x: 0.6, y: 0}
     alignment: 9
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 33
       width: 10
       height: 20
-    spriteID: 1f4e396d9c120634f89a588806d94985
+    spriteID: f31cc228410dd4790a333681128185b0
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -175,7 +175,7 @@ ScriptedImporter:
         y: 0
         width: 10
         height: 21
-      spriteId: 5ded0117e092b744b866cfad3b779b2a
+      spriteId: 9df2ae3f04c214b67a7235d9b859f0a4
     - name: vagabond-idle_Frame_1
       frameIndex: 1
       cellRect:
@@ -183,7 +183,7 @@ ScriptedImporter:
         y: 0
         width: 10
         height: 20
-      spriteId: 1f4e396d9c120634f89a588806d94985
+      spriteId: f31cc228410dd4790a333681128185b0
     linkedCells: []
     parentIndex: -1
   platformSettings:

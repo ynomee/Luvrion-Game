@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: vagabond-air-dash_Frame_0
     originalName: 
     pivot: {x: 0.6363636, y: -1.3529412}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 27
       width: 11
       height: 17
-    spriteID: b798bf7152d9522479b603d782aed61f
+    spriteID: 9029921a9fcd1456296cf7fc2323a79e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,7 +139,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 27}
-  - name: Frame_1
+  - name: vagabond-air-dash_Frame_1
     originalName: 
     pivot: {x: 0.65000004, y: -1.6000001}
     alignment: 9
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 4
       width: 20
       height: 15
-    spriteID: 2291726eb3b92c445996a645e1ace67a
+    spriteID: e5d043ec7cd674f9c9aec1d132d5cab5
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,7 +159,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_2
+  - name: vagabond-air-dash_Frame_2
     originalName: 
     pivot: {x: 0.7, y: -1.6000001}
     alignment: 9
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 4
       width: 10
       height: 15
-    spriteID: 3ac5e5c42ead5bb48872938aca5e00ce
+    spriteID: e03196707cc2a4fb0bcdcccc03e37d92
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -179,7 +179,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 32, y: 4}
-  - name: Frame_3
+  - name: vagabond-air-dash_Frame_3
     originalName: 
     pivot: {x: 0.8, y: -1.3529412}
     alignment: 9
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 27
       width: 10
       height: 17
-    spriteID: 3133225f6662f3746b5ed71879692be7
+    spriteID: a56c9592044a84ac6ab3017f95fb5c2d
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -215,7 +215,7 @@ ScriptedImporter:
         y: 23
         width: 11
         height: 17
-      spriteId: b798bf7152d9522479b603d782aed61f
+      spriteId: 9029921a9fcd1456296cf7fc2323a79e
     - name: vagabond-air-dash_Frame_1
       frameIndex: 1
       cellRect:
@@ -223,7 +223,7 @@ ScriptedImporter:
         y: 24
         width: 20
         height: 15
-      spriteId: 2291726eb3b92c445996a645e1ace67a
+      spriteId: e5d043ec7cd674f9c9aec1d132d5cab5
     - name: vagabond-air-dash_Frame_2
       frameIndex: 2
       cellRect:
@@ -231,7 +231,7 @@ ScriptedImporter:
         y: 24
         width: 10
         height: 15
-      spriteId: 3ac5e5c42ead5bb48872938aca5e00ce
+      spriteId: e03196707cc2a4fb0bcdcccc03e37d92
     - name: vagabond-air-dash_Frame_3
       frameIndex: 3
       cellRect:
@@ -239,7 +239,7 @@ ScriptedImporter:
         y: 23
         width: 10
         height: 17
-      spriteId: 3133225f6662f3746b5ed71879692be7
+      spriteId: a56c9592044a84ac6ab3017f95fb5c2d
     linkedCells: []
     parentIndex: -1
   platformSettings:

@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    public Vector2 platformingRespawnPoint;
+    [HideInInspector] public Vector2 platformingRespawnPoint;
+    public string transitionedFromRoom;
 
     public static GameManager Instance { get; private set; }
 
@@ -22,7 +23,7 @@ public class GameManager : MonoBehaviour
     }
     void Start()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        //Cursor.lockState = CursorLockMode.Locked;
+        //Cursor.visible = false;
     }
 }

@@ -13,7 +13,7 @@ public class PlayerTeleport : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (_teleporter.Contains(collision.gameObject)) 
+        if (_teleporter.Contains(collision.gameObject))
             return;
 
         if (_destination.TryGetComponent(out PlayerTeleport destinationTeleport))

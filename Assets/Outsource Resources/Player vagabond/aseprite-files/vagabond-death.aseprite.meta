@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: vagabond-death_Frame_0
     originalName: 
     pivot: {x: 0.6, y: 0}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 10
       height: 18
-    spriteID: 69420edc70c403646bdbe355b37f6126
+    spriteID: 7d51d6bd4e8eb4c1bbfb84f829c6e901
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,7 +139,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_1
+  - name: vagabond-death_Frame_1
     originalName: 
     pivot: {x: 0.54545456, y: 0}
     alignment: 9
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 4
       width: 11
       height: 15
-    spriteID: ab3d999c597e0fb41a5febe889190016
+    spriteID: 915703854f5f04ec1a7cb6ae571a3af2
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,7 +159,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 22, y: 4}
-  - name: Frame_2
+  - name: vagabond-death_Frame_2
     originalName: 
     pivot: {x: 0.54545456, y: 0}
     alignment: 9
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 27
       width: 11
       height: 15
-    spriteID: 8f78e74a99896154a8ac8592e587d519
+    spriteID: e1b0f91e747594a89ae07f98a4409b9c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -179,7 +179,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 22, y: 27}
-  - name: Frame_3
+  - name: vagabond-death_Frame_3
     originalName: 
     pivot: {x: 0.45454547, y: 0}
     alignment: 9
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 4
       width: 11
       height: 13
-    spriteID: 34e94c4a7723aef478671923053fb668
+    spriteID: 158c71d0eb33d410c823bcc258827069
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -199,7 +199,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 41, y: 4}
-  - name: Frame_4
+  - name: vagabond-death_Frame_4
     originalName: 
     pivot: {x: 0.45454547, y: 0}
     alignment: 9
@@ -210,7 +210,7 @@ ScriptedImporter:
       y: 50
       width: 11
       height: 10
-    spriteID: 4ac4b855e0044fb40b290e97ab1d44f4
+    spriteID: 9498967042582401a95a62ed6ba7921f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -219,7 +219,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 22, y: 50}
-  - name: Frame_5
+  - name: vagabond-death_Frame_5
     originalName: 
     pivot: {x: 0.30769232, y: 0}
     alignment: 9
@@ -230,7 +230,7 @@ ScriptedImporter:
       y: 40
       width: 13
       height: 8
-    spriteID: 443a80a67373c6441ac1026b77800bbc
+    spriteID: 18991fba47d6e413583ac6110e253e30
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -239,7 +239,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 41, y: 40}
-  - name: Frame_6
+  - name: vagabond-death_Frame_6
     originalName: 
     pivot: {x: 0.11111111, y: 0}
     alignment: 9
@@ -250,7 +250,7 @@ ScriptedImporter:
       y: 25
       width: 18
       height: 7
-    spriteID: 80f013d91d8e7ee479b5ac41c39792f0
+    spriteID: 706c7c71fa50d478a8c06b8e151f8841
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -275,7 +275,7 @@ ScriptedImporter:
         y: 0
         width: 10
         height: 18
-      spriteId: 69420edc70c403646bdbe355b37f6126
+      spriteId: 7d51d6bd4e8eb4c1bbfb84f829c6e901
     - name: vagabond-death_Frame_1
       frameIndex: 1
       cellRect:
@@ -283,7 +283,7 @@ ScriptedImporter:
         y: 0
         width: 11
         height: 15
-      spriteId: ab3d999c597e0fb41a5febe889190016
+      spriteId: 915703854f5f04ec1a7cb6ae571a3af2
     - name: vagabond-death_Frame_2
       frameIndex: 2
       cellRect:
@@ -291,7 +291,7 @@ ScriptedImporter:
         y: 0
         width: 11
         height: 15
-      spriteId: 8f78e74a99896154a8ac8592e587d519
+      spriteId: e1b0f91e747594a89ae07f98a4409b9c
     - name: vagabond-death_Frame_3
       frameIndex: 3
       cellRect:
@@ -299,7 +299,7 @@ ScriptedImporter:
         y: 0
         width: 11
         height: 13
-      spriteId: 34e94c4a7723aef478671923053fb668
+      spriteId: 158c71d0eb33d410c823bcc258827069
     - name: vagabond-death_Frame_4
       frameIndex: 4
       cellRect:
@@ -307,7 +307,7 @@ ScriptedImporter:
         y: 0
         width: 11
         height: 10
-      spriteId: 4ac4b855e0044fb40b290e97ab1d44f4
+      spriteId: 9498967042582401a95a62ed6ba7921f
     - name: vagabond-death_Frame_5
       frameIndex: 5
       cellRect:
@@ -315,7 +315,7 @@ ScriptedImporter:
         y: 0
         width: 13
         height: 8
-      spriteId: 443a80a67373c6441ac1026b77800bbc
+      spriteId: 18991fba47d6e413583ac6110e253e30
     - name: vagabond-death_Frame_6
       frameIndex: 6
       cellRect:
@@ -323,7 +323,7 @@ ScriptedImporter:
         y: 0
         width: 18
         height: 7
-      spriteId: 80f013d91d8e7ee479b5ac41c39792f0
+      spriteId: 706c7c71fa50d478a8c06b8e151f8841
     linkedCells: []
     parentIndex: -1
   platformSettings:

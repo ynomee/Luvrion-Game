@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: vagabond-jump-flip_Frame_0
     originalName: 
     pivot: {x: 0.5882353, y: -0.90909094}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 17
       height: 22
-    spriteID: ad1565bc140c13e408cfab8151236d30
+    spriteID: 1bd50fc867878456aabd102992d50141
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,7 +139,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_1
+  - name: vagabond-jump-flip_Frame_1
     originalName: 
     pivot: {x: 0.57894737, y: -1.5}
     alignment: 9
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 4
       width: 19
       height: 16
-    spriteID: ef05d671bd8754a4ca1810641b0c2a31
+    spriteID: 505ace5c1f5484aa4aaab1dd4105c91b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,7 +159,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 29, y: 4}
-  - name: Frame_2
+  - name: vagabond-jump-flip_Frame_2
     originalName: 
     pivot: {x: 0.5294118, y: -1.4117647}
     alignment: 9
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 34
       width: 17
       height: 17
-    spriteID: 1f5b6647cdffcdf49b605a1f0d64c5dc
+    spriteID: aa921203700d7476ba0bcf0d7c0ecb2a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -195,7 +195,7 @@ ScriptedImporter:
         y: 20
         width: 17
         height: 22
-      spriteId: ad1565bc140c13e408cfab8151236d30
+      spriteId: 1bd50fc867878456aabd102992d50141
     - name: vagabond-jump-flip_Frame_1
       frameIndex: 1
       cellRect:
@@ -203,7 +203,7 @@ ScriptedImporter:
         y: 24
         width: 19
         height: 16
-      spriteId: ef05d671bd8754a4ca1810641b0c2a31
+      spriteId: 505ace5c1f5484aa4aaab1dd4105c91b
     - name: vagabond-jump-flip_Frame_2
       frameIndex: 2
       cellRect:
@@ -211,7 +211,7 @@ ScriptedImporter:
         y: 24
         width: 17
         height: 17
-      spriteId: 1f5b6647cdffcdf49b605a1f0d64c5dc
+      spriteId: aa921203700d7476ba0bcf0d7c0ecb2a
     linkedCells: []
     parentIndex: -1
   platformSettings:

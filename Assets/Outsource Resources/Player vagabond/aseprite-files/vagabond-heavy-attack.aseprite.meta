@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: vagabond-heavy-attack_Frame_0
     originalName: 
     pivot: {x: 1.846154, y: 0}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 129
       width: 26
       height: 19
-    spriteID: e0767475c157d3a4aa49c9832edaaea2
+    spriteID: 24a14fece853f41888bc7360fe77d97c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,7 +139,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 129}
-  - name: Frame_1
+  - name: vagabond-heavy-attack_Frame_1
     originalName: 
     pivot: {x: 1.846154, y: 0}
     alignment: 9
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 182
       width: 26
       height: 17
-    spriteID: e879c035f2e421841b72dc311fbe4e43
+    spriteID: 17f36b1099f8e415e9e14348b836c2d7
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,7 +159,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 182}
-  - name: Frame_2
+  - name: vagabond-heavy-attack_Frame_2
     originalName: 
     pivot: {x: 1.846154, y: 0}
     alignment: 9
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 207
       width: 26
       height: 17
-    spriteID: fc0d97ce04183e348a35d1d221373621
+    spriteID: 0aabb5ace16814459b03a05451faf255
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -179,7 +179,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 207}
-  - name: Frame_3
+  - name: vagabond-heavy-attack_Frame_3
     originalName: 
     pivot: {x: 1.846154, y: 0}
     alignment: 9
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 232
       width: 26
       height: 17
-    spriteID: 18daa0d18b8944642bf6eb82cd77b3b6
+    spriteID: f1eb2ccaf844249a2ba1ecba531f275c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -199,7 +199,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 232}
-  - name: Frame_4
+  - name: vagabond-heavy-attack_Frame_4
     originalName: 
     pivot: {x: 1.846154, y: 0}
     alignment: 9
@@ -210,7 +210,7 @@ ScriptedImporter:
       y: 67
       width: 26
       height: 17
-    spriteID: 3e4d68a93fa956544b607fba505b9e59
+    spriteID: 9e21377eb00fa41bfae8376d7a404a8f
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -219,7 +219,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 63, y: 67}
-  - name: Frame_5
+  - name: vagabond-heavy-attack_Frame_5
     originalName: 
     pivot: {x: 1.846154, y: 0}
     alignment: 9
@@ -230,7 +230,7 @@ ScriptedImporter:
       y: 92
       width: 26
       height: 17
-    spriteID: ac29bbc98d502ee40974f631f570069a
+    spriteID: 24918dd120a584a1db619a15e8841fe1
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -239,7 +239,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 63, y: 92}
-  - name: Frame_6
+  - name: vagabond-heavy-attack_Frame_6
     originalName: 
     pivot: {x: 1.846154, y: 0}
     alignment: 9
@@ -250,7 +250,7 @@ ScriptedImporter:
       y: 117
       width: 26
       height: 17
-    spriteID: 3cbc0f79766ce454aa1dce31e4d63ec2
+    spriteID: 1a87e331763934321b439aa40e934c2c
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -259,7 +259,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 63, y: 117}
-  - name: Frame_7
+  - name: vagabond-heavy-attack_Frame_7
     originalName: 
     pivot: {x: 1.8846154, y: 0}
     alignment: 9
@@ -270,7 +270,7 @@ ScriptedImporter:
       y: 156
       width: 26
       height: 18
-    spriteID: f652f16115ed85047b2468ce8455c87a
+    spriteID: 8b0ab06781b3a4ed7a5c3b79226adb7b
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -279,7 +279,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 156}
-  - name: Frame_8
+  - name: vagabond-heavy-attack_Frame_8
     originalName: 
     pivot: {x: 0.72058827, y: 0}
     alignment: 9
@@ -290,7 +290,7 @@ ScriptedImporter:
       y: 4
       width: 68
       height: 55
-    spriteID: 7922349438085824b8281deaf711a80b
+    spriteID: 94a6c070395a841be97197076637bb8e
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -299,7 +299,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_9
+  - name: vagabond-heavy-attack_Frame_9
     originalName: 
     pivot: {x: 0.6862745, y: 0}
     alignment: 9
@@ -310,7 +310,7 @@ ScriptedImporter:
       y: 67
       width: 51
       height: 27
-    spriteID: 5ca5f4413bde0be47bfbf51127308bb1
+    spriteID: a77d7ecf7de2b45e39495443389c9363
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -319,7 +319,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 67}
-  - name: Frame_10
+  - name: vagabond-heavy-attack_Frame_10
     originalName: 
     pivot: {x: 0.76086956, y: 0}
     alignment: 9
@@ -330,7 +330,7 @@ ScriptedImporter:
       y: 102
       width: 46
       height: 19
-    spriteID: e8be5dc7f19e96842b5f966bc757d782
+    spriteID: f43509491d6894c618d869a4a82fc42a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -339,7 +339,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 102}
-  - name: Frame_11
+  - name: vagabond-heavy-attack_Frame_11
     originalName: 
     pivot: {x: 0.8888889, y: 0}
     alignment: 9
@@ -350,7 +350,7 @@ ScriptedImporter:
       y: 4
       width: 36
       height: 17
-    spriteID: 5744edfcf51febd4fbfd30027d2b8b29
+    spriteID: f7458ffe7ad2c451aa4febfde13ca7d1
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -359,7 +359,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 80, y: 4}
-  - name: Frame_12
+  - name: vagabond-heavy-attack_Frame_12
     originalName: 
     pivot: {x: 0.8857143, y: 0}
     alignment: 9
@@ -370,7 +370,7 @@ ScriptedImporter:
       y: 29
       width: 35
       height: 17
-    spriteID: 4bd30b4861e24aa4dbc11b5a2d7c91ce
+    spriteID: c47d1090750d545e9aabbe0d31af1da9
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -395,7 +395,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 19
-      spriteId: e0767475c157d3a4aa49c9832edaaea2
+      spriteId: 24a14fece853f41888bc7360fe77d97c
     - name: vagabond-heavy-attack_Frame_1
       frameIndex: 1
       cellRect:
@@ -403,7 +403,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 17
-      spriteId: e879c035f2e421841b72dc311fbe4e43
+      spriteId: 17f36b1099f8e415e9e14348b836c2d7
     - name: vagabond-heavy-attack_Frame_2
       frameIndex: 2
       cellRect:
@@ -411,7 +411,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 17
-      spriteId: fc0d97ce04183e348a35d1d221373621
+      spriteId: 0aabb5ace16814459b03a05451faf255
     - name: vagabond-heavy-attack_Frame_3
       frameIndex: 3
       cellRect:
@@ -419,7 +419,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 17
-      spriteId: 18daa0d18b8944642bf6eb82cd77b3b6
+      spriteId: f1eb2ccaf844249a2ba1ecba531f275c
     - name: vagabond-heavy-attack_Frame_4
       frameIndex: 4
       cellRect:
@@ -427,7 +427,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 17
-      spriteId: 3e4d68a93fa956544b607fba505b9e59
+      spriteId: 9e21377eb00fa41bfae8376d7a404a8f
     - name: vagabond-heavy-attack_Frame_5
       frameIndex: 5
       cellRect:
@@ -435,7 +435,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 17
-      spriteId: ac29bbc98d502ee40974f631f570069a
+      spriteId: 24918dd120a584a1db619a15e8841fe1
     - name: vagabond-heavy-attack_Frame_6
       frameIndex: 6
       cellRect:
@@ -443,7 +443,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 17
-      spriteId: 3cbc0f79766ce454aa1dce31e4d63ec2
+      spriteId: 1a87e331763934321b439aa40e934c2c
     - name: vagabond-heavy-attack_Frame_7
       frameIndex: 7
       cellRect:
@@ -451,7 +451,7 @@ ScriptedImporter:
         y: 0
         width: 26
         height: 18
-      spriteId: f652f16115ed85047b2468ce8455c87a
+      spriteId: 8b0ab06781b3a4ed7a5c3b79226adb7b
     - name: vagabond-heavy-attack_Frame_8
       frameIndex: 8
       cellRect:
@@ -459,7 +459,7 @@ ScriptedImporter:
         y: 0
         width: 68
         height: 55
-      spriteId: 7922349438085824b8281deaf711a80b
+      spriteId: 94a6c070395a841be97197076637bb8e
     - name: vagabond-heavy-attack_Frame_9
       frameIndex: 9
       cellRect:
@@ -467,7 +467,7 @@ ScriptedImporter:
         y: 0
         width: 51
         height: 27
-      spriteId: 5ca5f4413bde0be47bfbf51127308bb1
+      spriteId: a77d7ecf7de2b45e39495443389c9363
     - name: vagabond-heavy-attack_Frame_10
       frameIndex: 10
       cellRect:
@@ -475,7 +475,7 @@ ScriptedImporter:
         y: 0
         width: 46
         height: 19
-      spriteId: e8be5dc7f19e96842b5f966bc757d782
+      spriteId: f43509491d6894c618d869a4a82fc42a
     - name: vagabond-heavy-attack_Frame_11
       frameIndex: 11
       cellRect:
@@ -483,7 +483,7 @@ ScriptedImporter:
         y: 0
         width: 36
         height: 17
-      spriteId: 5744edfcf51febd4fbfd30027d2b8b29
+      spriteId: f7458ffe7ad2c451aa4febfde13ca7d1
     - name: vagabond-heavy-attack_Frame_12
       frameIndex: 12
       cellRect:
@@ -491,7 +491,7 @@ ScriptedImporter:
         y: 0
         width: 35
         height: 17
-      spriteId: 4bd30b4861e24aa4dbc11b5a2d7c91ce
+      spriteId: c47d1090750d545e9aabbe0d31af1da9
     linkedCells: []
     parentIndex: -1
   platformSettings:

@@ -119,7 +119,7 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Frame_0
+  - name: vagabond-run-end_Frame_0
     originalName: 
     pivot: {x: 0.6363636, y: 0}
     alignment: 9
@@ -130,7 +130,7 @@ ScriptedImporter:
       y: 4
       width: 11
       height: 20
-    spriteID: 339dc898e8368e34e919b4eb56498a81
+    spriteID: 56e8e7b9e4b4c41ec8d66fff24cc1f31
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -139,7 +139,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 44, y: 4}
-  - name: Frame_1
+  - name: vagabond-run-end_Frame_1
     originalName: 
     pivot: {x: 0.5, y: 0}
     alignment: 9
@@ -150,7 +150,7 @@ ScriptedImporter:
       y: 4
       width: 12
       height: 21
-    spriteID: 05ca932efdf670c498afdc5311ec7577
+    spriteID: 43981c2d363a84488a1855a3501c4971
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -159,7 +159,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
-  - name: Frame_2
+  - name: vagabond-run-end_Frame_2
     originalName: 
     pivot: {x: 0.6666667, y: 0}
     alignment: 9
@@ -170,7 +170,7 @@ ScriptedImporter:
       y: 4
       width: 12
       height: 21
-    spriteID: 40a2c173ea0ab894cb2d890b3e8c93c7
+    spriteID: 66d8f057a5aa644f1af5caa84db2f9ab
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -179,7 +179,7 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 24, y: 4}
-  - name: Frame_3
+  - name: vagabond-run-end_Frame_3
     originalName: 
     pivot: {x: 0.6, y: 0}
     alignment: 9
@@ -190,7 +190,7 @@ ScriptedImporter:
       y: 33
       width: 10
       height: 21
-    spriteID: ea67a4d73abf85e46b62e542a8bcef75
+    spriteID: cd1b5602242c0437ea09cf81e672f14a
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -215,7 +215,7 @@ ScriptedImporter:
         y: 0
         width: 11
         height: 20
-      spriteId: 339dc898e8368e34e919b4eb56498a81
+      spriteId: 56e8e7b9e4b4c41ec8d66fff24cc1f31
     - name: vagabond-run-end_Frame_1
       frameIndex: 1
       cellRect:
@@ -223,7 +223,7 @@ ScriptedImporter:
         y: 0
         width: 12
         height: 21
-      spriteId: 05ca932efdf670c498afdc5311ec7577
+      spriteId: 43981c2d363a84488a1855a3501c4971
     - name: vagabond-run-end_Frame_2
       frameIndex: 2
       cellRect:
@@ -231,7 +231,7 @@ ScriptedImporter:
         y: 0
         width: 12
         height: 21
-      spriteId: 40a2c173ea0ab894cb2d890b3e8c93c7
+      spriteId: 66d8f057a5aa644f1af5caa84db2f9ab
     - name: vagabond-run-end_Frame_3
       frameIndex: 3
       cellRect:
@@ -239,7 +239,7 @@ ScriptedImporter:
         y: 0
         width: 10
         height: 21
-      spriteId: ea67a4d73abf85e46b62e542a8bcef75
+      spriteId: cd1b5602242c0437ea09cf81e672f14a
     linkedCells: []
     parentIndex: -1
   platformSettings:
