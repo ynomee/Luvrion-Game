@@ -11,14 +11,8 @@ public class PlayerController : MonoBehaviour
 
     private void Awake()
     {
-        // ������� ������
         _playerModel = new PlayerModel();
 
-        // �������� ������ � View � Movement
-        // _playerView._playerModel = _playerModel;
-        // _playerModel.RegisterObserver(_playerView);
-
-        // _playerMovement._playerModel = _playerModel;
         _playerView.Initialize(_playerModel);
         _playerMovement.Initialize(_playerModel);
     }

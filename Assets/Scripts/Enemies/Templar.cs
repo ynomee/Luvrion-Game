@@ -5,7 +5,10 @@ using UnityEngine;
 
 public class Templar : Enemy
 {
+    [Header("Enemy spawn point")]
     [SerializeField] private Vector2 _spawnPoint;
+
+    [Header("Distance")]
     [SerializeField] private float _distance;
 
     private bool _isInCombat = false;
@@ -13,8 +16,6 @@ public class Templar : Enemy
 
     private Coroutine _combatCoroutine;
     private Coroutine _exitTimerCoroutine;
-
-
 
     protected override void Start()
     {

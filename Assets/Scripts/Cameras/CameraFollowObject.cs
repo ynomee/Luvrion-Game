@@ -1,9 +1,12 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using Cinemachine;
 
 public class CameraFollowObject : MonoBehaviour
 {
+    public static CameraFollowObject Instance { get; private set; }
+
     [Header("References")]
     [SerializeField] private Transform _playerTransform;
 
@@ -11,27 +14,55 @@ public class CameraFollowObject : MonoBehaviour
     [SerializeField] private float _flipYRotationTime = 0.5f;
 
     private Coroutine _turnCoroutine;
-
     private PlayerMovement _player;
-
     private bool _isFacingRight;
 
     private void Awake()
     {
-        _player = _playerTransform.GetComponent<PlayerMovement>();
-
-        _isFacingRight = _player.IsFacingRight;
+        if (Instance == null)
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+            return;
+        }
+        Debug.Log("Awake: Initial _isFacingRight = " + _isFacingRight);
     }
 
-    private void Update()
+    private void Start()
     {
+        FindPlayer();
+        SceneManager.sceneLoaded += OnSceneLoaded;
+        Debug.Log("CameraFollowObject запущен в сцене: " + gameObject.name);
+    }
 
+    private void OnDestroy()
+    {
+        SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
     private void LateUpdate()
     {
-        //make the cameraFollowObj follow the player's pos
+        if (_playerTransform == null)
+        {
+            Debug.LogWarning("Игрок не найден, пробуем найти снова...");
+            return;
+        }
+
         transform.position = _playerTransform.position;
+    }
+
+    private void FindPlayer()
+    {
+        if (PlayerSingleton.Instance != null)
+        {
+            _playerTransform = PlayerSingleton.Instance.transform;
+            _player = _playerTransform.GetComponent<PlayerMovement>();
+            _isFacingRight = _player.IsFacingRight;
+        }
     }
 
     public void CallTurn()
@@ -43,32 +74,41 @@ public class CameraFollowObject : MonoBehaviour
     {
         float startRotation = transform.localEulerAngles.y;
         float endRotationAmount = DetermineEndRotation();
-        float yRotation = 0f;
-
-        //the passed time
         float elapsedTime = 0f;
-        while (elapsedTime < _flipYRotationTime) 
+
+        while (elapsedTime < _flipYRotationTime)
         {
             elapsedTime += Time.deltaTime;
-
-            //lerp the y rotation
-            yRotation = Mathf.Lerp(startRotation, endRotationAmount, (elapsedTime/_flipYRotationTime));
+            float yRotation = Mathf.Lerp(startRotation, endRotationAmount, elapsedTime / _flipYRotationTime);
             transform.rotation = Quaternion.Euler(0, yRotation, 0);
-
             yield return null;
         }
     }
 
     private float DetermineEndRotation()
     {
-        _isFacingRight = !_isFacingRight;
-        if (_isFacingRight)
+        return _player.IsFacingRight ? 0f : 180f;
+    }
+
+    private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
+    {
+        Debug.Log("Сцена загружена: " + scene.name);
+        AssignCinemachineTarget();
+    }
+
+    private void AssignCinemachineTarget()
+    {
+        CinemachineVirtualCamera cinemachineCam = FindObjectOfType<CinemachineVirtualCamera>();
+
+        if (cinemachineCam.Follow != null)
         {
-            return 180f;
+            cinemachineCam.Follow = transform;
+            Debug.Log("Cinemachine Virtual Camera обновила Follow -> " + transform.name);
         }
         else
         {
-            return 0f;
+            Debug.LogWarning("Cinemachine Virtual Camera не найдена!");
         }
     }
 }
+

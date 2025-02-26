@@ -5,7 +5,7 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     [HideInInspector] public Vector2 platformingRespawnPoint;
-    public string transitionedFromRoom;
+    [HideInInspector] public string transitionedFromScene;
 
     public static GameManager Instance { get; private set; }
 
@@ -21,6 +21,7 @@ public class GameManager : MonoBehaviour
         }
         DontDestroyOnLoad(gameObject);
     }
+
     void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;

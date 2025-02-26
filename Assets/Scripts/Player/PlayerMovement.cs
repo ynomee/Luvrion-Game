@@ -2,7 +2,7 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerMovement : MonoBehaviour, IPlayerMovement
+public class PlayerMovement : MonoBehaviour
 {
     //Scriptable object which holds all the player's movement parameters. If you don't want to use it
     //just paste in all the parameters, though you will need to manuly change all references in this script
@@ -30,7 +30,6 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     public bool IsWallJumping { get; private set; }
     public bool IsDashing { get; private set; }
     public bool IsSliding { get; private set; }
-    public bool FacingRight { get; private set; }
 
     //Timers (also all fields, could be private and a method returning a bool could be used)
     public float LastOnGroundTime { get; private set; }
@@ -106,6 +105,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         IsFacingRight = true;
 
         _cameraFollowObject = _cameraFollow.GetComponent<CameraFollowObject>();
+        _cameraFollowObject = FindObjectOfType<CameraFollowObject>();
 
         _fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;
 
@@ -165,6 +165,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
             UpdateWallJumpAnimation();
         }
         #endregion
+
         recoil.HandleRecoil(_moveInput.y, _bonusJumpsLeft, RB.gravityScale, LastOnGroundTime);
 
     }
@@ -172,6 +173,7 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
     private void Update()
     {
         if (pState.cutScene) return;
+
         #region TIMERS
         LastOnGroundTime -= Time.deltaTime;
         LastOnWallTime -= Time.deltaTime;
@@ -341,8 +343,6 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
         //UpdateYVelocity();
         #endregion
     }
-
-
 
     private void LateUpdate()
     {
@@ -567,18 +567,36 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
             IsFacingRight = !IsFacingRight;
             pState.lookingRight = false;
             //turn the camera follow object
-            _cameraFollowObject.CallTurn();
+            //_cameraFollowObject.CallTurn();
         }
         else
         {
             Vector3 rotator = new Vector3(transform.rotation.x, 0, transform.rotation.z);
             transform.rotation = Quaternion.Euler(rotator);
             IsFacingRight = !IsFacingRight;
-            pState.lookingRight = true;
+            pState.lookingRight = true;           
             //turn the camera follow object
-            _cameraFollowObject.CallTurn();
+            //_cameraFollowObject.CallTurn();
         }
+            if (_cameraFollowObject == null)
+            {
+                FindCamera();
+            }
 
+            // turn camera if it's find
+            _cameraFollowObject?.CallTurn();
+            
+    }
+
+    private void FindCamera()
+    {
+        _cameraFollowObject = CameraFollowObject.Instance;
+
+        if (_cameraFollowObject == null)
+        {
+            Debug.Log("Camera not found!");
+            return;
+        }
     }
     #endregion
 
@@ -747,7 +765,6 @@ public class PlayerMovement : MonoBehaviour, IPlayerMovement
             return false;
     }
     #endregion
-
 
     #region EDITOR METHODS
     private void OnDrawGizmosSelected()

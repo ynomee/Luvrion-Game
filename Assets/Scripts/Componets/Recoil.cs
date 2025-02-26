@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class Recoil : MonoBehaviour
 {
-    [Header("Components")]
-    private IPlayerMovement _playerMovement;
-    private IRigidbodyAdapter _rigidbodyAdapter;
-
     [Header("Recoil")]
     [SerializeField] private int _recoilXSteps = 5;
     [SerializeField] private int _recoilYSteps = 5;

@@ -4,31 +4,38 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    [Header("Components")]
     protected PlayerStateList pState;
     protected HealthComponent healthComponent;
     protected TimeRestore timeRestore;
+    [SerializeField] protected GameObject playerObj;
 
+    [Space(3)]
+
+    [Header("Health Setting")]
     [SerializeField] protected float health;
 
+    [Header("Recoil Settings")]
     [SerializeField] protected float recoilLenght;
     [SerializeField] protected float recoilFactor;
     [SerializeField] protected bool isRecoiling = false;
 
-    [SerializeField] protected GameObject playerObj;
-
+    [Space(3)]
+    [Header("Speed and Damage Settings")]
     [SerializeField] protected float speed;
     [SerializeField] protected float damage;
 
+    [Space(3)]
+    [Header("Checks")]
     [SerializeField] protected Transform _enemySideAttackCheck;
     [SerializeField] protected Vector2 _enemySideAttackArea;
-    [SerializeField] protected GameObject _splashEffect;
-
-    [SerializeField] protected GameObject _chargeEffect;
     [SerializeField] protected Vector2 _enemyChargeAttackArea;
     [SerializeField] protected Transform _enemyChargeCheck;
 
-    //[SerializeField] protected float distance;
-    //[SerializeField] protected float distanceBetween = 4;
+    [Space(3)]
+    [Header("Effects")]
+    [SerializeField] protected GameObject _splashEffect;
+    [SerializeField] protected GameObject _chargeEffect;
 
     protected Rigidbody2D rb;
     protected float recoilTimer;
@@ -46,14 +53,13 @@ public class Enemy : MonoBehaviour
 
     protected EnemyStates currentEnemyState;
 
-    protected virtual void Awake()
-    {
-        Physics2D.IgnoreCollision(playerObj.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
-    }
-
     protected virtual void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        
+        playerObj = PlayerSingleton.Instance.player;
+
+        Physics2D.IgnoreCollision(playerObj.GetComponent<Collider2D>(), GetComponent<Collider2D>(), true);
 
         healthComponent = playerObj.GetComponent<HealthComponent>();
         pState = playerObj.GetComponent<PlayerStateList>();
