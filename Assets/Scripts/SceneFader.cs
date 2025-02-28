@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 public class SceneFader : MonoBehaviour
 {
-    [SerializeField] private float _fadeTime;
+    public float fadeTime;
 
     private Image _fadeOutUIImage;
 
@@ -63,6 +63,6 @@ public class SceneFader : MonoBehaviour
     {
         _fadeOutUIImage.color = new Color(_fadeOutUIImage.color.r, _fadeOutUIImage.color.g,_fadeOutUIImage.color.b, alpha);
 
-        alpha += Time.deltaTime * (1 / _fadeTime) * (fadeDirection == FadeDirection.Out ? -1 :  1); 
+        alpha += Time.deltaTime * (1 / fadeTime) * (fadeDirection == FadeDirection.Out ? -1 :  1); 
     }
 }

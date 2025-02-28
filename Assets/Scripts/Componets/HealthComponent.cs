@@ -14,7 +14,7 @@ public class HealthComponent : MonoBehaviour
     public int maxHealth;
 
     [Header("Visual Effects")]
-    [SerializeField] GameObject _bloodSpurt;
+    [SerializeField] private GameObject _bloodSpurt;
 
     private void Awake()
     {

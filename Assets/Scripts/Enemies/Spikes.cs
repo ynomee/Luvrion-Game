@@ -7,16 +7,17 @@ public class Spikes : MonoBehaviour
     [SerializeField] private PlayerStateList _pstate;
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private HealthComponent _health;
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
-    void Update()
+    private GameObject playerObj;
+
+    private void Start()
     {
-        
+        playerObj = PlayerSingleton.Instance.player;
+
+        _rb = playerObj.GetComponent<Rigidbody2D>();
+        _pstate = playerObj.GetComponent<PlayerStateList>();
+        _health = playerObj.GetComponent<HealthComponent>();
+
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -29,15 +30,25 @@ public class Spikes : MonoBehaviour
 
     IEnumerator RespawnPoint()
     {
+        _pstate.cutScene = true;
         _pstate.invinsible = true;
+
         _rb.velocity = Vector2.zero;
         Time.timeScale = 0;
+
+        StartCoroutine(UIManager.Instance.sceneFader.Fade(SceneFader.FadeDirection.In));
         _health.TakeDamage(1);
 
-        yield return new WaitForSecondsRealtime(1);
-        _rb.transform.position = GameManager.Instance.platformingRespawnPoint;
-        _pstate.invinsible = false;
+        yield return new WaitForSecondsRealtime(0.5f);
         Time.timeScale = 1;
+
+        _rb.transform.position = GameManager.Instance.platformingRespawnPoint;
+
+        StartCoroutine(UIManager.Instance.sceneFader.Fade(SceneFader.FadeDirection.Out));
+        yield return new WaitForSecondsRealtime(UIManager.Instance.sceneFader.fadeTime);
+
+        _pstate.cutScene = false;
+        _pstate.invinsible = false;
 
     }
 }

@@ -118,7 +118,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void OnTriggerStay2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !pState.invinsible)
+        if (other.CompareTag("Player") && !pState.invinsible && health > 0)
         {
             Attack();
             timeRestore.HitStopTime(0, 5, 0.5f);
