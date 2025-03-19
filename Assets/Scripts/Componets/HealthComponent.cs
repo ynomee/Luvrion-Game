@@ -1,10 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class HealthComponent : MonoBehaviour
 {
     public PlayerStateList pState;
+    public DeathComponent deathComponent;
 
     [Header("Health Settings")]
     [SerializeField] private int _health;
@@ -23,13 +25,20 @@ public class HealthComponent : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
-        Health -= Mathf.RoundToInt(damage);
-        Debug.Log($"Player damaged, health: {Health}");
-        StartCoroutine(StopTakingDamage());
-        if (Health <= 0)
+        if(pState.alive)
         {
-            Debug.Log("Player dead");
+            Health -= Mathf.RoundToInt(damage);
+            if (Health <= 0)
+            {
+                Health = 0;
+                StartCoroutine(deathComponent.Death());
+            }
+            else
+            {
+                StartCoroutine(StopTakingDamage()); 
+            }
         }
+
     }
 
     public int Health
@@ -61,4 +70,5 @@ public class HealthComponent : MonoBehaviour
 
         pState.invinsible = false;
     }
+
 }

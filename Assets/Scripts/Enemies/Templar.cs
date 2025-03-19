@@ -34,9 +34,12 @@ public class Templar : Enemy
         switch(currentEnemyState)
         {
             case EnemyStates.Templar_IDLE:
-                {           
-                    if (_distance < 12)                  
-                        EnterCombat();                   
+                {      
+                    if (pState.alive)
+                    {
+                        if (_distance < 12)                  
+                        EnterCombat();   
+                    }     
                     break;
                 }
             case EnemyStates.Templar_Combat:
@@ -79,6 +82,9 @@ public class Templar : Enemy
 
         if (_combatCoroutine == null)
             _combatCoroutine = StartCoroutine(CombatBehaviour());
+
+        if(!pState.alive)
+            ChangeState(EnemyStates.Templar_IDLE);
     }
 
     private IEnumerator CombatBehaviour()

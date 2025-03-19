@@ -8,7 +8,7 @@ public interface IBloodInstantiaction
 }
 
 
-public class DeathComponent : MonoBehaviour, IBloodInstantiaction
+public class DeathComponent : MonoBehaviour, IBloodInstantiaction 
 {
     [SerializeField] private PlayerStateList _pstate;
     [SerializeField] private GameObject _bloodSpurt;
@@ -20,7 +20,8 @@ public class DeathComponent : MonoBehaviour, IBloodInstantiaction
 
         BloodInstantiate();
 
-        yield return new WaitForSeconds(0.9f);
+        yield return new WaitForSeconds(0.1f);
+        StartCoroutine(UIManager.Instance.ActivateDeathScreen()); 
     }
 
     public void BloodInstantiate()

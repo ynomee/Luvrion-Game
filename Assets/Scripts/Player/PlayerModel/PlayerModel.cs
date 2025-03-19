@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -13,6 +14,7 @@ public interface IPlayerObserver
     void OnWallJumpStart();
     void OnWallJumpEnd();
     void OnAttack();
+    void OnRespawn();
 }
 
 public class PlayerModel
@@ -128,6 +130,14 @@ public class PlayerModel
         foreach (var observer in _observers)
         {
             observer.OnAttack();
+        }
+    }
+
+    public void Respawn()
+    {
+        foreach (var observer in _observers)
+        {
+            observer.OnRespawn();
         }
     }
 

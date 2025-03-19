@@ -68,8 +68,7 @@ public class Enemy : MonoBehaviour
 
     protected virtual void FixedUpdate()
     {
-        UpdateEnemyState();
-        
+        UpdateEnemyState();      
     }
 
     protected virtual void Update()
@@ -121,7 +120,10 @@ public class Enemy : MonoBehaviour
         if (other.CompareTag("Player") && !pState.invinsible && health > 0)
         {
             Attack();
-            timeRestore.HitStopTime(0, 5, 0.5f);
+            if (pState.alive)
+            {
+                timeRestore.HitStopTime(0, 5, 0.5f);  
+            }
         }
     }
 

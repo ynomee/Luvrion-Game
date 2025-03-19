@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -53,5 +54,10 @@ public class PlayerView : MonoBehaviour, IPlayerObserver
     public void OnAttack()
     {
         _animator.SetTrigger("Melee");
+    }
+
+    public void OnRespawn()
+    {
+        _animator.Play("Idle");
     }
 }

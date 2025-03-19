@@ -7,6 +7,7 @@ public class PlayerMovement : MonoBehaviour
     //Scriptable object which holds all the player's movement parameters. If you don't want to use it
     //just paste in all the parameters, though you will need to manuly change all references in this script
     public PlayerData Data;
+
     //Temporary test player state list
     public PlayerStateList pState;
     public Recoil recoil;
@@ -85,6 +86,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private GameObject _cameraFollow;
 
     private CameraFollowObject _cameraFollowObject;
+
     private float _fallSpeedYDampingChangeThreshold;
     #endregion
 
@@ -173,7 +175,12 @@ public class PlayerMovement : MonoBehaviour
     private void Update()
     {
         if (pState.cutScene) return;
-
+        
+        if (!pState.alive)
+        {
+            _moveInput.x = 0;
+            _moveInput.y = 0;
+        }
         #region TIMERS
         LastOnGroundTime -= Time.deltaTime;
         LastOnWallTime -= Time.deltaTime;
@@ -390,34 +397,45 @@ public class PlayerMovement : MonoBehaviour
     #region INPUT ACTION
     private void OnPlayerInputActionTriggered(InputAction.CallbackContext context)
     {
-        switch (context.action.name)
+        if (pState.alive)
         {
-            case "Move":
-                _moveInput = context.action.ReadValue<Vector2>();
-                UpdateRunAnimation();
-                break;
-            case "Jump":
-                switch (context.action.phase)
-                {
-                    case InputActionPhase.Started:
-                        OnJumpInput();
-                        break;
-                    case InputActionPhase.Canceled:
-                        OnJumpUpInput();
-                        break;
-                }
-                break;
-            case "Dash":
-                if(context.action.phase == InputActionPhase.Started)
-                OnDashInput();
-                break;
-            case "Attack":
-                if (context.action.phase == InputActionPhase.Started)
-                    UpdateAttackState();
-                break;
+                switch (context.action.name)
+            {
+                case "Move":
+                    _moveInput = context.action.ReadValue<Vector2>();
+                    UpdateRunAnimation();
+                    break;
+                case "Jump":
+                    switch (context.action.phase)
+                    {
+                        case InputActionPhase.Started:
+                            OnJumpInput();
+                            break;
+                        case InputActionPhase.Canceled:
+                            OnJumpUpInput();
+                            break;
+                    }
+                    break;
+                case "Dash":
+                    if(context.action.phase == InputActionPhase.Started)
+                    OnDashInput();
+                    break;
+                case "Attack":
+                    if (context.action.phase == InputActionPhase.Started)
+                        UpdateAttackState();
+                    break;
+                case "Interact":
+                    if (context.action.phase == InputActionPhase.Started)
+                    {
+                        if (GameManager.Instance.checkpoint != null && GameManager.Instance.checkpoint.inRange == true)
+                            GameManager.Instance.checkpoint.Interact();                  
+                    }
+                    break;
+            } 
         }
     }
     #endregion
+
     private void UpdateRunAnimation()
     {
         _playerModel.UpdateSpeed(_moveInput.x);

@@ -8,15 +8,15 @@ public class Spikes : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private HealthComponent _health;
 
-    private GameObject playerObj;
+    private GameObject _playerObj;
 
     private void Start()
     {
-        playerObj = PlayerSingleton.Instance.player;
+        _playerObj = PlayerSingleton.Instance.player;
 
-        _rb = playerObj.GetComponent<Rigidbody2D>();
-        _pstate = playerObj.GetComponent<PlayerStateList>();
-        _health = playerObj.GetComponent<HealthComponent>();
+        _rb = _playerObj.GetComponent<Rigidbody2D>();
+        _pstate = _playerObj.GetComponent<PlayerStateList>();
+        _health = _playerObj.GetComponent<HealthComponent>();
 
     }
 
