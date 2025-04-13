@@ -814,6 +814,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: 3LVL
       objectReference: {fileID: 0}
+    - target: {fileID: 8959670774724629455, guid: 119498dc466ad8b46a53619f6cc0933b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
