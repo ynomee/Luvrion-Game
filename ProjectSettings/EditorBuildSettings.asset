@@ -32,4 +32,25 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/9thRoom.unity
     guid: 7caa095dc178ec847842395bbe6fa773
+  - enabled: 1
+    path: Assets/Scenes/3rdRoomNew.unity
+    guid: e729aeb5f20622542a2240e97b4c6d02
+  - enabled: 1
+    path: Assets/Scenes/4thRoomNew.unity
+    guid: 61119d43f8fa89e4091235a60fe8fe85
+  - enabled: 1
+    path: Assets/Scenes/5thRoomNew.unity
+    guid: af5b8ab09919da0418ed51c6c7dc6f79
+  - enabled: 1
+    path: Assets/Scenes/6thRoomNew.unity
+    guid: 4226560082750e246897b1bbd6646ec2
+  - enabled: 1
+    path: Assets/Scenes/7thRoomNew.unity
+    guid: 25f569f812bc40348a52be0e717cca08
+  - enabled: 1
+    path: Assets/Scenes/8thRoomNew.unity
+    guid: e352f679e62b9374187483a2870df265
+  - enabled: 1
+    path: Assets/Scenes/9thRoomNew.unity
+    guid: 8c3dd7c5edca9924c94b69531ce22fa3
   m_configObjects: {}

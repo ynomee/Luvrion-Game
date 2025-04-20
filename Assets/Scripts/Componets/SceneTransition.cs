@@ -12,7 +12,7 @@ public class SceneTransition : MonoBehaviour
     [SerializeField] private Rigidbody2D RB;
     [SerializeField] private PlayerMovement pm;
     
-    [SerializeField] private Vector3 _cameraNewPosition;
+    //[SerializeField] private Vector3 _cameraNewPosition;
 
     private void Start()
     {
@@ -58,14 +58,14 @@ public class SceneTransition : MonoBehaviour
         player.transform.position = _startPoint.position;
         RB.velocity = Vector2.zero;
         
-        if (Camera.main != null)
+        /*if (Camera.main != null)
         {
             Camera.main.transform.position = _cameraNewPosition;
         }
         else
         {
             Debug.LogWarning("Main Camera не найдена!");
-        }
+        }*/
         
         
         
