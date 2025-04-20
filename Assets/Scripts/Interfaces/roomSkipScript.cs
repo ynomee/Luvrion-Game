@@ -18,8 +18,7 @@ public class SceneTransitionTimer : MonoBehaviour
 
     [Tooltip("Тег игрока, чтобы скрипт знал, кого телепортировать")]
     public string playerTag = "Player";
-
-    private float timer;
+    
     private bool hotkeyUnlocked = false;
     private bool timerStarted = false;
 
@@ -39,8 +38,7 @@ public class SceneTransitionTimer : MonoBehaviour
         {
             timerStarted = true; // Timer started before.
         }
-
-        timer = 0;
+        
         hotkeyUnlocked = false;
 
         // Убедимся, что UI элемент не активен при старте

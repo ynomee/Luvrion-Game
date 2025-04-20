@@ -18,35 +18,35 @@ MonoBehaviour:
   maxFallSpeed: 18
   fastFallGravityMult: 1
   maxFastFallSpeed: 20
-  runMaxSpeed: 9.5
-  runAcceleration: 9.5
+  runMaxSpeed: 8
+  runAcceleration: 8
   runAccelAmount: 50
-  runDecceleration: 9.5
+  runDecceleration: 8
   runDeccelAmount: 50
   accelInAir: 1
   deccelInAir: 1
   doConserveMomentum: 0
-  jumpHeight: 6.5
-  jumpTimeToApex: 0.5
-  jumpForce: 26
+  jumpHeight: 5
+  jumpTimeToApex: 0.4
+  jumpForce: 25
   jumpCutGravityMult: 3.5
   jumpHangGravityMult: 1
   jumpHangTimeThreshold: 0
   jumpHangAccelerationMult: 1
   jumpHangMaxSpeedMult: 1
   airJumps: 1
-  wallJumpForce: {x: 10, y: 25}
+  wallJumpForce: {x: 15, y: 25}
   wallJumpRunLerp: 0.075
-  wallJumpTime: 0.3
+  wallJumpTime: 0.261
   doTurnOnWallJump: 1
-  slideSpeed: -12
+  slideSpeed: -5
   slideAccel: 12
   coyoteTime: 0.2
   jumpInputBufferTime: 0.2
   dashAmount: 1
-  dashSpeed: 40
+  dashSpeed: 60
   dashSleepTime: 0.05
-  dashAttackTime: 0.3
+  dashAttackTime: 0.2
   dashEndTime: 0.15
   dashEndSpeed: {x: 15, y: 15}
   dashEndRunLerp: 0.5
