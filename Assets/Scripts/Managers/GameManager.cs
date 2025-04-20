@@ -45,6 +45,7 @@ public class GameManager : MonoBehaviour
 
     public void RespawnPlayer()
     {
+        Debug.Log("Кнопка респавна нажата");
         if (checkpoint != null)
         {
             if (checkpoint._interacted)   

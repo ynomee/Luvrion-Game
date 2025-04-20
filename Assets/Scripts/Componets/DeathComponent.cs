@@ -21,7 +21,7 @@ public class DeathComponent : MonoBehaviour, IBloodInstantiaction
         BloodInstantiate();
 
         yield return new WaitForSeconds(0.1f);
-        StartCoroutine(UIManager.Instance.ActivateDeathScreen()); 
+        StartCoroutine(UIManager.Instance.ActivateDeathScreen());
     }
 
     public void BloodInstantiate()

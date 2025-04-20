@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -89,6 +90,24 @@ public class PlayerMovement : MonoBehaviour
 
     private float _fallSpeedYDampingChangeThreshold;
     #endregion
+    
+    #region STAMINA
+    [SerializeField] private int _maxStamina = 4;
+    [SerializeField] private float _staminaRegenInterval = 0.5f;
+    [SerializeField] private float _staminaRegenAmount = 0.1f;
+    private float _currentStamina;
+    private float _timeSinceLastRegen;
+    
+    [Header("Stamina UI")]
+    [SerializeField] private Image _staminaBarSegment1;
+    [SerializeField] private Image _staminaBarSegment2;
+    [SerializeField] private Image _staminaBarSegment3;
+    [SerializeField] private Image _staminaBarSegment4;
+    [SerializeField] private Color _staminaFilledColor = Color.green; // Цвет заполненной ячейки стамины
+    [SerializeField] private Color _staminaEmptyColor = Color.red; 
+
+    public float CurrentStamina { get { return _currentStamina; } }
+    #endregion
 
     public void Initialize(PlayerModel model)
     {
@@ -112,6 +131,10 @@ public class PlayerMovement : MonoBehaviour
         _fallSpeedYDampingChangeThreshold = CameraManager.instance.fallSpeedYDampingChangeThreshold;
 
         _attack = GetComponent<IAttack>();
+        
+        _currentStamina = _maxStamina; 
+        _timeSinceLastRegen = 0f;
+        UpdateStaminaUI();
     }
 
     private void FixedUpdate()
@@ -250,15 +273,17 @@ public class PlayerMovement : MonoBehaviour
             //DOUBLE JUMP
             else if (LastPressedJumpTime > 0 && _bonusJumpsLeft > 0)
             {
-                IsJumping = true;
-                IsWallJumping = false;
-                _isJumpCut = false;
-                _isJumpFalling = false;
+                if (TryConsumeStamina(1))
+                {
+                    IsJumping = true;
+                    IsWallJumping = false;
+                    _isJumpCut = false;
+                    _isJumpFalling = false;
 
-                _bonusJumpsLeft--;
+                    _bonusJumpsLeft--;
 
-                Jump();
-
+                    Jump();
+                }
                 //AnimHandler.startedJumping = true;
             }
         }
@@ -267,29 +292,34 @@ public class PlayerMovement : MonoBehaviour
         #region DASH CHECKS
         if (CanDash() && LastPressedDashTime > 0)
         {
-            //Freeze game for split second. Adds juiciness and a bit of forgiveness over directional input
-            Sleep(Data.dashSleepTime);
-
-            //Can dash if direction left or right
-            if (_moveInput.x > 0)
-                _lastDashDir = Vector2.right;
-            else if (_moveInput.x < 0)
-                _lastDashDir = Vector2.left;
-            else
-            //Dash where avatar facing
-                _lastDashDir = IsFacingRight ? Vector2.right : Vector2.left;
-
-
-            if(_lastDashDir == Vector2.left || _lastDashDir == Vector2.right)
+            if (TryConsumeStamina(1))
             {
-                IsDashing = true;
-                IsJumping = false;
-                IsWallJumping = false;
-                _isJumpCut = false;
-            
-                UpdateDashAnimation();
+                //Freeze game for split second. Adds juiciness and a bit of forgiveness over directional input
+                Sleep(Data.dashSleepTime);
 
-                StartCoroutine(nameof(StartDash), _lastDashDir);
+                //Can dash if direction left or right
+                if (_moveInput.x > 0)
+                    _lastDashDir = Vector2.right;
+                else if (_moveInput.x < 0)
+                    _lastDashDir = Vector2.left;
+                else
+                //Dash where avatar facing
+                    _lastDashDir = IsFacingRight ? Vector2.right : Vector2.left;
+
+
+                if(_lastDashDir == Vector2.left || _lastDashDir == Vector2.right)
+                {
+                    
+                        IsDashing = true;
+                        IsJumping = false;
+                        IsWallJumping = false;
+                        _isJumpCut = false;
+                
+                        UpdateDashAnimation();
+
+                        StartCoroutine(nameof(StartDash), _lastDashDir);
+                    
+                }
             }
         }
         #endregion
@@ -348,6 +378,18 @@ public class PlayerMovement : MonoBehaviour
 
         #region UPDATE VERTICAL VELOCITY
         //UpdateYVelocity();
+        #endregion
+        
+        #region STAMINA
+        if (_currentStamina < _maxStamina)
+        {
+            _timeSinceLastRegen += Time.deltaTime;
+            if (_timeSinceLastRegen >= _staminaRegenInterval)
+            {
+                RegenStamina(_staminaRegenAmount);
+                _timeSinceLastRegen = 0f;
+            }
+        }
         #endregion
     }
 
@@ -473,6 +515,45 @@ public class PlayerMovement : MonoBehaviour
 
     }
 
+    private void RegenStamina(float amount)
+    {
+        _currentStamina = Mathf.Min(_currentStamina + amount, _maxStamina);
+        UpdateStaminaUI();
+    }
+    
+    public bool TryConsumeStamina(int amount)
+    {
+        if (_currentStamina >= amount)
+        {
+            _currentStamina -= amount;
+            UpdateStaminaUI();
+            return true;
+        }
+        else
+        {
+            // TODO добавить звук или другое информирование игрока о неудаче.
+            return false;
+        }
+    }
+    
+    private void UpdateStaminaUI()
+    {
+        float fillAmount1 = Mathf.Clamp01(Mathf.Min(_currentStamina, 1f));
+        float fillAmount2 = Mathf.Clamp01(Mathf.Min(Mathf.Max(_currentStamina - 1f, 0f), 1f));
+        float fillAmount3 = Mathf.Clamp01(Mathf.Min(Mathf.Max(_currentStamina - 2f, 0f), 1f));
+        float fillAmount4 = Mathf.Clamp01(Mathf.Min(Mathf.Max(_currentStamina - 3f, 0f), 1f));
+        
+        _staminaBarSegment1.color = (_currentStamina >= 1f) ? _staminaFilledColor : _staminaEmptyColor;
+        _staminaBarSegment2.color = (_currentStamina >= 2f) ? _staminaFilledColor : _staminaEmptyColor;
+        _staminaBarSegment3.color = (_currentStamina >= 3f) ? _staminaFilledColor : _staminaEmptyColor;
+        _staminaBarSegment4.color = (_currentStamina >= 4f) ? _staminaFilledColor : _staminaEmptyColor;
+        
+        _staminaBarSegment1.fillAmount = fillAmount1;
+        _staminaBarSegment2.fillAmount = fillAmount2;
+        _staminaBarSegment3.fillAmount = fillAmount3;
+        _staminaBarSegment4.fillAmount = fillAmount4;
+    }
+    
     private void UpdateAttackState()
     {
         _attack.HandleAttack(_moveInput.y, LastOnGroundTime);
