@@ -58,6 +58,7 @@ public class PlayerView : MonoBehaviour, IPlayerObserver
 
     public void OnRespawn()
     {
+        
         _animator.Play("Idle");
     }
 }

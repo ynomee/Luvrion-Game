@@ -63,6 +63,6 @@ public class SceneFader : MonoBehaviour
     {
         _fadeOutUIImage.color = new Color(_fadeOutUIImage.color.r, _fadeOutUIImage.color.g,_fadeOutUIImage.color.b, alpha);
 
-        alpha += Time.deltaTime * (1 / fadeTime*(fadeDirection == FadeDirection.Out ? 0.5f :  1)) * (fadeDirection == FadeDirection.Out ? -1 :  1); 
+        alpha += Time.deltaTime * (1 / fadeTime) * (fadeDirection == FadeDirection.Out ? -1 :  1); 
     }
 }

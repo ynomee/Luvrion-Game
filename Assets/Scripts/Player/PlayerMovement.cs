@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
     public bool IsFacingRight { get; private set; }
     public bool IsJumping { get; private set; }
     public bool IsWallJumping { get; private set; }
-    public bool IsDashing { get; private set; }
+    public bool IsDashing { get; set; }
     public bool IsSliding { get; private set; }
 
     //Timers (also all fields, could be private and a method returning a bool could be used)
@@ -54,7 +54,8 @@ public class PlayerMovement : MonoBehaviour
     private int _dashesLeft;
     private bool _dashRefilling;
     private Vector2 _lastDashDir;
-    private bool _isDashAttacking;
+    public bool _isDashAttacking;
+    public Coroutine DashCoroutine;
 
     #endregion
 
@@ -317,7 +318,7 @@ public class PlayerMovement : MonoBehaviour
                 
                         UpdateDashAnimation();
 
-                        StartCoroutine(nameof(StartDash), _lastDashDir);
+                        DashCoroutine = StartCoroutine(nameof(StartDash), _lastDashDir);
                     
                 }
             }
@@ -478,17 +479,17 @@ public class PlayerMovement : MonoBehaviour
     }
     #endregion
 
-    private void UpdateRunAnimation()
+    public void UpdateRunAnimation()
     {
         _playerModel.UpdateSpeed(_moveInput.x);
     }
 
-    private void UpdateJumpAnimation()
+    public void UpdateJumpAnimation()
     {  
         _playerModel.UpdateJumpState(IsJumping);
     }
 
-    private void UpdateDashAnimation()
+    public void UpdateDashAnimation()
     {
         _playerModel.UpdateDashState(IsDashing);
     }
