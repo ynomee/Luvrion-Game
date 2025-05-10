@@ -6000,6 +6000,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 55b44291a053def42a68321dbb11ad62, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fee190bdd49ae304c857e2567b82d4b7, type: 2}
     - target: {fileID: 919132149155446097, guid: 55b44291a053def42a68321dbb11ad62, type: 3}
       propertyPath: m_Name
       value: FloorMini_low
@@ -6062,6 +6066,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 4b3d947b1fa1c2e4b9e8871a2b687a31, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fee190bdd49ae304c857e2567b82d4b7, type: 2}
     - target: {fileID: 919132149155446097, guid: 4b3d947b1fa1c2e4b9e8871a2b687a31, type: 3}
       propertyPath: m_Name
       value: FloorTObraz_low
@@ -6930,7 +6938,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30c96fb6c45215b44886c18d58f166f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 46.569534
+      value: 46.9
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30c96fb6c45215b44886c18d58f166f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7630,7 +7638,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30c96fb6c45215b44886c18d58f166f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 54.91954
+      value: 55.47
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30c96fb6c45215b44886c18d58f166f4, type: 3}
       propertyPath: m_LocalPosition.y
@@ -8866,6 +8874,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 55b44291a053def42a68321dbb11ad62, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: fee190bdd49ae304c857e2567b82d4b7, type: 2}
     - target: {fileID: 919132149155446097, guid: 55b44291a053def42a68321dbb11ad62, type: 3}
       propertyPath: m_Name
       value: FloorMini_low (1)
@@ -10582,7 +10594,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30c96fb6c45215b44886c18d58f166f4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 38.189545
+      value: 38.39
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: 30c96fb6c45215b44886c18d58f166f4, type: 3}
       propertyPath: m_LocalPosition.y

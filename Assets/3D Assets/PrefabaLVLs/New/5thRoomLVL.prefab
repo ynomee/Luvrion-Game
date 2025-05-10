@@ -7820,6 +7820,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 93b15665e508fea4c8b62b6ac24070ca, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 3f6a66f924c01f34081c757925833d1f, type: 2}
     - target: {fileID: 919132149155446097, guid: 93b15665e508fea4c8b62b6ac24070ca, type: 3}
       propertyPath: m_Name
       value: StenkaPlatform02For5lvl
@@ -8158,6 +8162,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 0a849d46810fb2a4cba95407b15972b6, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: f094c0fe94a74ab419c30a1a2d82a34f, type: 2}
     - target: {fileID: 919132149155446097, guid: 0a849d46810fb2a4cba95407b15972b6, type: 3}
       propertyPath: m_Name
       value: Platform7Type_low
@@ -9834,6 +9842,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 230221b346f18e349bcdd623c56cfe51, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8f84eebdeac8a144fb177a0c1cb0d08a, type: 2}
     - target: {fileID: 919132149155446097, guid: 230221b346f18e349bcdd623c56cfe51, type: 3}
       propertyPath: m_Name
       value: StenkaPlatform01For5lvl
@@ -10382,6 +10394,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df940fe38c63c554cadda78f0a081bbb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 40df6787fea88024b928d76b73e88660, type: 2}
     - target: {fileID: 919132149155446097, guid: df940fe38c63c554cadda78f0a081bbb, type: 3}
       propertyPath: m_Name
       value: Stenka03For5Lvl
@@ -12688,6 +12704,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: af9b675f22895964b82ce2ca70825fec, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e670dc94cfca7134db65297a0a2eaf72, type: 2}
     - target: {fileID: 919132149155446097, guid: af9b675f22895964b82ce2ca70825fec, type: 3}
       propertyPath: m_Name
       value: Stenka02For5lvl
@@ -14574,6 +14594,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: df683931065e6f647b0a5fbf49ae321c, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 18c7b112894d3384dab2d0f388169838, type: 2}
     - target: {fileID: 919132149155446097, guid: df683931065e6f647b0a5fbf49ae321c, type: 3}
       propertyPath: m_Name
       value: Potolok01For5lvl
@@ -16394,6 +16418,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: 79181a32e80079c4da3d89286aa2916b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 0162757446dea8f46916ef0acfde12e7, type: 2}
     - target: {fileID: 919132149155446097, guid: 79181a32e80079c4da3d89286aa2916b, type: 3}
       propertyPath: m_Name
       value: Stenka01For5lvl
