@@ -54,6 +54,11 @@ public class SceneTransitionTimer : MonoBehaviour
 
     void Update()
     {
+        if (Time.timeScale == 0f) // Если игра в паузе, ничего не делаем
+        {
+            return;
+        }
+        
         if (!timerStarted)
         {
             return; // Ensure timer only runs once.

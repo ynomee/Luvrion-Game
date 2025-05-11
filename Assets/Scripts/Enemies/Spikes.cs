@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Spikes : MonoBehaviour
 {
@@ -42,6 +43,13 @@ public class Spikes : MonoBehaviour
         _pstate.cutScene = true;
         _pstate.invinsible = true;
         
+        // Забираем контроль над персонажем
+        PlayerInput playerInput = _playerObj.GetComponent<PlayerInput>();
+        if (playerInput != null)
+        {
+            playerInput.enabled = false;
+        }
+        
         PlayerMovement pm = _playerObj.GetComponent<PlayerMovement>();
         if (pm != null)
         {
@@ -70,6 +78,8 @@ public class Spikes : MonoBehaviour
 
         _rb.transform.position = _respawnCollider.bounds.center;
         
+        
+        
         if (_pv != null)
         {
             _pv.OnWallJumpEnd();
@@ -86,6 +96,12 @@ public class Spikes : MonoBehaviour
 
         _pstate.cutScene = false;
         _pstate.invinsible = false;
+        
+        // Возвращаем контроль над персонажем
+        if (playerInput != null)
+        {
+            playerInput.enabled = true;
+        }
 
     }
 }

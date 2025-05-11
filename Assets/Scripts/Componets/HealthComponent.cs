@@ -71,4 +71,13 @@ public class HealthComponent : MonoBehaviour
         pState.invinsible = false;
     }
 
+    public int GetCurrentDeath()
+    {
+        return maxHealth - Health;
+    }
+
+    public void RestoreFullHealth()
+    {
+        Health = maxHealth;
+    }
 }

@@ -104,8 +104,9 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private Image _staminaBarSegment2;
     [SerializeField] private Image _staminaBarSegment3;
     [SerializeField] private Image _staminaBarSegment4;
-    [SerializeField] private Color _staminaFilledColor = Color.green; // Цвет заполненной ячейки стамины
-    [SerializeField] private Color _staminaEmptyColor = Color.red; 
+    [SerializeField] private Color _staminaFilledColor = new Color(0.00390625F, 0.16015625F, 0.12890625F, 1F); // Цвет заполненной ячейки стамины
+    [SerializeField] private Color _staminaEmptyColor = new Color(0.38671875F, 0.09375F, 0.14453125F, 1F); 
+        //new Color(0.4296875F, 0.39453125F, 0.50390625F, 1F); 
 
     public float CurrentStamina { get { return _currentStamina; } }
     #endregion
@@ -140,6 +141,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void FixedUpdate()
     {
+        if (Time.timeScale == 0f) // Если игра в паузе, ничего не делаем
+        {
+            return;
+        }
+        
         if (pState.cutScene) return;
 
         UpdateYVelocity();
@@ -198,6 +204,11 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (Time.timeScale == 0f) // Если игра в паузе, ничего не делаем
+        {
+            return;
+        }
+        
         if (pState.cutScene) return;
         
         if (!pState.alive)
@@ -274,17 +285,14 @@ public class PlayerMovement : MonoBehaviour
             //DOUBLE JUMP
             else if (LastPressedJumpTime > 0 && _bonusJumpsLeft > 0)
             {
-                if (TryConsumeStamina(1))
-                {
-                    IsJumping = true;
-                    IsWallJumping = false;
-                    _isJumpCut = false;
-                    _isJumpFalling = false;
+                IsJumping = true;
+                IsWallJumping = false;
+                _isJumpCut = false;
+                _isJumpFalling = false;
 
-                    _bonusJumpsLeft--;
+                _bonusJumpsLeft--;
 
-                    Jump();
-                }
+                Jump();
                 //AnimHandler.startedJumping = true;
             }
         }
@@ -304,22 +312,22 @@ public class PlayerMovement : MonoBehaviour
                 else if (_moveInput.x < 0)
                     _lastDashDir = Vector2.left;
                 else
-                //Dash where avatar facing
+                    //Dash where avatar facing
                     _lastDashDir = IsFacingRight ? Vector2.right : Vector2.left;
 
 
                 if(_lastDashDir == Vector2.left || _lastDashDir == Vector2.right)
                 {
-                    
-                        IsDashing = true;
-                        IsJumping = false;
-                        IsWallJumping = false;
-                        _isJumpCut = false;
                 
-                        UpdateDashAnimation();
+                    IsDashing = true;
+                    IsJumping = false;
+                    IsWallJumping = false;
+                    _isJumpCut = false;
+            
+                    UpdateDashAnimation();
 
-                        DashCoroutine = StartCoroutine(nameof(StartDash), _lastDashDir);
-                    
+                    DashCoroutine = StartCoroutine(nameof(StartDash), _lastDashDir);
+                
                 }
             }
         }
