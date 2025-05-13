@@ -19,6 +19,7 @@ public class Timer : MonoBehaviour
                 Debug.LogError("TextMeshProUGUI не найден!");
             }
         }
+        _elapsedTime = 0f;
         UpdateTimerText(); // Обновляем текст таймера при старте
     }
 

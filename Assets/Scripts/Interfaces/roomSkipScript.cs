@@ -15,7 +15,9 @@ public class SceneTransitionTimer : MonoBehaviour
 
     [Tooltip("Координаты для телепортации игрока.")]
     public Vector3 teleportPosition = Vector3.zero; // Начальная позиция - начало координат
-
+    
+    [SerializeField] private GameObject _teleportHintPanel; //подложка для текста
+    
     [Tooltip("Тег игрока, чтобы скрипт знал, кого телепортировать")]
     public string playerTag = "Player";
     
@@ -88,6 +90,10 @@ public class SceneTransitionTimer : MonoBehaviour
         {
             hintText.text = unlockHint;
             hintText.gameObject.SetActive(true);
+        }
+        if (_teleportHintPanel != null)
+        {
+            _teleportHintPanel.SetActive(true);
         }
 
         Debug.Log("Хоткей скипа разблокирован!");
