@@ -10369,6 +10369,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8824071971326757680, guid: 5a75f25be7964c8479d58a79955896b5, type: 3}
   m_PrefabInstance: {fileID: 1060515449}
   m_PrefabAsset: {fileID: 0}
+--- !u!61 &1060515451 stripped
+BoxCollider2D:
+  m_CorrespondingSourceObject: {fileID: 7648299050560954180, guid: 5a75f25be7964c8479d58a79955896b5, type: 3}
+  m_PrefabInstance: {fileID: 1060515449}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1122064849
 GameObject:
   m_ObjectHideFlags: 0
@@ -11733,7 +11738,7 @@ PrefabInstance:
     - target: {fileID: 4455017068294338474, guid: d320cd9b7689c694abc24f3d5f30eb56, type: 3}
       propertyPath: _respawnCollider
       value: 
-      objectReference: {fileID: 1618840519}
+      objectReference: {fileID: 1060515451}
     - target: {fileID: 6127541835600617296, guid: d320cd9b7689c694abc24f3d5f30eb56, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

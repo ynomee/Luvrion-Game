@@ -9,12 +9,16 @@ public class GameOverManager : MonoBehaviour
     [SerializeField] private GameObject _gameOverPanel; // Ссылка на панель GameOver
     [SerializeField] private TextMeshProUGUI _timerText; // Ссылка на TextMeshPro для отображения таймера
     [SerializeField] private TextMeshProUGUI _deathCountText; // Ссылка на TextMeshPro для отображения количества смертей
+    [SerializeField] private TextMeshProUGUI _scoreText;
     [SerializeField] private Button _restartButton; // Ссылка на кнопку "Restart"
     [SerializeField] private Button _exitButton; // Ссылка на кнопку "Exit"
     [SerializeField] private Timer _timer;  // Ссылка на скрипт Timer
     [SerializeField] private HealthComponent _health; // Ссылка на скрипт HealthComponent
     [SerializeField] private GameObject _player; //Ссылка на игрока
     [SerializeField] private PlayerStateList _pState;
+    [SerializeField] private float base_score;
+    [SerializeField] private float timeWeight;
+    [SerializeField] private float deathWeight;
     
     private Vector3 _startPosition; // Стартовая позиция игрока
     private float _startTimeScale;
@@ -106,11 +110,23 @@ public class GameOverManager : MonoBehaviour
 
         if (_deathCountText != null)
         {
-            _deathCountText.text = "Deaths: " + deathCount; // Отображаем количество смертей
+            _deathCountText.text = "" + deathCount; // Отображаем количество смертей
         }
         else
         {
             Debug.LogError("DeathCountText не назначен!");
+        }
+        
+        if (_scoreText != null)
+        {
+            float score = base_score /
+                          (1 + timeWeight * Mathf.Log(1 + gameTime) + deathWeight * Mathf.Log(1 + deathCount));
+            score = Mathf.Round(score * 100.0f) / 0.01f;
+            _scoreText.text = "" + score;
+        }
+        else
+        {
+            Debug.LogError("scoreText не назначен!");
         }
     }
 
