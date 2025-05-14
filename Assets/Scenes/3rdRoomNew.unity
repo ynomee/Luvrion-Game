@@ -27465,6 +27465,22 @@ PrefabInstance:
       propertyPath: m_Name
       value: 3rdRoomLvL
       objectReference: {fileID: 0}
+    - target: {fileID: 1370222828865443259, guid: 54f8c9099aaa25b47881d37b597e9008, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2699725771973791397, guid: 54f8c9099aaa25b47881d37b597e9008, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 23.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 2699725771973791397, guid: 54f8c9099aaa25b47881d37b597e9008, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 17.43
+      objectReference: {fileID: 0}
+    - target: {fileID: 2889517798408802054, guid: 54f8c9099aaa25b47881d37b597e9008, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 16.97
+      objectReference: {fileID: 0}
     - target: {fileID: 4881948144929822422, guid: 54f8c9099aaa25b47881d37b597e9008, type: 3}
       propertyPath: m_LocalPosition.x
       value: 15.067623
