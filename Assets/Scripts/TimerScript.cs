@@ -7,6 +7,7 @@ public class Timer : MonoBehaviour
     [SerializeField] private bool _isPaused = false;   // Флаг паузы таймера
 
     private float _elapsedTime = 0f; // Прошедшее время
+    private bool _gameIsStarted;
 
     private void Start()
     {
@@ -21,15 +22,22 @@ public class Timer : MonoBehaviour
         }
         _elapsedTime = 0f;
         UpdateTimerText(); // Обновляем текст таймера при старте
+        _gameIsStarted = false;
     }
 
     private void Update()
     {
-        if (!_isPaused)
+        if(Input.anyKeyDown) _gameIsStarted = true;
+        
+        if (_gameIsStarted)
         {
-            _elapsedTime += Time.unscaledDeltaTime; // Используем Time.unscaledDeltaTime, чтобы таймер работал во время Time.timeScale = 0
-            UpdateTimerText(); // Обновляем текст таймера
+            if (!_isPaused)
+            {
+                _elapsedTime += Time.unscaledDeltaTime; // Используем Time.unscaledDeltaTime, чтобы таймер работал во время Time.timeScale = 0
+                UpdateTimerText(); // Обновляем текст таймера
+            }
         }
+        
     }
 
     // Метод для форматирования времени в строку
@@ -65,6 +73,7 @@ public class Timer : MonoBehaviour
     public void ClearTimer()
     {
         _elapsedTime = 0f;
+        _gameIsStarted = false;
     }
 
     public float GetElapsedTime()

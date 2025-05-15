@@ -9,6 +9,7 @@ public class Spikes : MonoBehaviour
     [SerializeField] private Rigidbody2D _rb;
     [SerializeField] private HealthComponent _health;
     [SerializeField] private PlayerView _pv;
+    [SerializeField] private PlayerSounds _ps;
 
     [Tooltip("Коллайдер, к которому телепортируется игрок после столкновения с шипами.")]
     [SerializeField] private Collider2D _respawnCollider;
@@ -23,11 +24,9 @@ public class Spikes : MonoBehaviour
         _pstate = _playerObj.GetComponent<PlayerStateList>();
         _health = _playerObj.GetComponent<HealthComponent>();
         _pv = _playerObj.GetComponent<PlayerView>();
-
-        //if (_respawnCollider == null)
-        //{
-        //    Debug.LogError("Не назначен коллайдер для телепортации игрока.");
-        //}
+        PlayerMovement playerMovement = _playerObj.GetComponent<PlayerMovement>();
+        _ps = playerMovement.playerSounds;
+        
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -42,6 +41,7 @@ public class Spikes : MonoBehaviour
     {
         _pstate.cutScene = true;
         _pstate.invinsible = true;
+        _ps.PlayDeathSound();
         
         // Забираем контроль над персонажем
         PlayerInput playerInput = _playerObj.GetComponent<PlayerInput>();

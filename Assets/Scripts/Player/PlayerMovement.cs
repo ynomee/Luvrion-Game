@@ -92,7 +92,7 @@ public class PlayerMovement : MonoBehaviour
     private float _fallSpeedYDampingChangeThreshold;
     #endregion
     
-    #region STAMINA
+
     [SerializeField] private int _maxStamina = 4;
     [SerializeField] private float _staminaRegenInterval = 0.5f;
     [SerializeField] private float _staminaRegenAmount = 0.1f;
@@ -109,8 +109,11 @@ public class PlayerMovement : MonoBehaviour
         //new Color(0.4296875F, 0.39453125F, 0.50390625F, 1F); 
 
     public float CurrentStamina { get { return _currentStamina; } }
-    #endregion
 
+
+    [SerializeField] public PlayerSounds playerSounds;
+    
+    
     public void Initialize(PlayerModel model)
     {
         _playerModel = model;
@@ -183,6 +186,7 @@ public class PlayerMovement : MonoBehaviour
                 {
                     // �������� AnimHandler.justLanded = true;
                     UpdateJumpAnimation();
+                    playerSounds.PlayFallSound();
                 }
 
                 LastOnGroundTime = Data.coyoteTime; // if so sets the lastGrounded to coyoteTime
@@ -263,6 +267,9 @@ public class PlayerMovement : MonoBehaviour
                 IsWallJumping = false;
                 _isJumpCut = false;
                 _isJumpFalling = false;
+                playerSounds.StopRunSound();
+                playerSounds.PlayJumpSound();
+                
                 Jump();
 
                 UpdateJumpAnimation();
@@ -277,9 +284,10 @@ public class PlayerMovement : MonoBehaviour
 
                 _wallJumpStartTime = Time.time;
                 _lastWallJumpDir = (LastOnWallRightTime > 0) ? -1 : 1;
-
+                
+                playerSounds.PlayJumpSound();
                 WallJump(_lastWallJumpDir);
-
+            
                 //UpdateWallJumpAnimation();
             }
             //DOUBLE JUMP
@@ -291,7 +299,10 @@ public class PlayerMovement : MonoBehaviour
                 _isJumpFalling = false;
 
                 _bonusJumpsLeft--;
-
+                
+                playerSounds.StopRunSound();
+                playerSounds.PlayJumpSound();
+                
                 Jump();
                 //AnimHandler.startedJumping = true;
             }
@@ -305,7 +316,9 @@ public class PlayerMovement : MonoBehaviour
             {
                 //Freeze game for split second. Adds juiciness and a bit of forgiveness over directional input
                 Sleep(Data.dashSleepTime);
-
+                playerSounds.StopRunSound();
+                playerSounds.PlayDashSound();
+                
                 //Can dash if direction left or right
                 if (_moveInput.x > 0)
                     _lastDashDir = Vector2.right;
@@ -333,12 +346,19 @@ public class PlayerMovement : MonoBehaviour
         }
         #endregion
 
-        #region SLIDE CHECKS
+        // SLIDE CHECKS
         if (CanSlide() && ((LastOnWallLeftTime > 0 && _moveInput.x < 0) || (LastOnWallRightTime > 0 && _moveInput.x > 0)))
+        {
             IsSliding = true;
+        }
         else
+        {
+            if (IsSliding)
+            {
+                playerSounds.StopSlidingSound(); // Останавливаем звук, если слайд закончился
+            }
             IsSliding = false;
-        #endregion
+        }
 
         #region GRAVITY
         if (!_isDashAttacking)
@@ -663,6 +683,15 @@ public class PlayerMovement : MonoBehaviour
 		 * RB.velocity = new Vector2(RB.velocity.x + (Time.fixedDeltaTime  * speedDif * accelRate) / RB.mass, RB.velocity.y);
 		 * Time.fixedDeltaTime is by default in Unity 0.02 seconds equal to 50 FixedUpdate() calls per second
 		*/
+        
+        if (LastOnGroundTime > 0 && Mathf.Abs(_moveInput.x) > 0.1f && !IsDashing && !IsSliding)
+        {
+            playerSounds.StartRunSound(); // Запускаем звук (если не играет)
+        }
+        else
+        {
+            playerSounds.StopRunSound(); // Останавливаем, если игрок не бежит
+        }
     }
 
     public void Turn()
@@ -808,6 +837,8 @@ public class PlayerMovement : MonoBehaviour
     #region OTHER MOVEMENT METHODS
     private void Slide()
     {
+        playerSounds.StopRunSound();
+        playerSounds.StartSlidingSound();
         //We remove the remaining upwards Impulse to prevent upwards sliding
         if (RB.velocity.y > 0)
         {
